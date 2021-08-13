@@ -1,0 +1,33 @@
+/Users/fayazkhan/Projects/PEOCMIS/DAL/bin/Debug/netstandard2.1/DAL.deps.json
+/Users/fayazkhan/Projects/PEOCMIS/DAL/bin/Debug/netstandard2.1/DAL.dll
+/Users/fayazkhan/Projects/PEOCMIS/DAL/bin/Debug/netstandard2.1/DAL.pdb
+/Users/fayazkhan/Projects/PEOCMIS/DAL/obj/Debug/netstandard2.1/DAL.AssemblyInfoInputs.cache
+/Users/fayazkhan/Projects/PEOCMIS/DAL/obj/Debug/netstandard2.1/DAL.AssemblyInfo.cs
+/Users/fayazkhan/Projects/PEOCMIS/DAL/obj/Debug/netstandard2.1/DAL.csproj.CoreCompileInputs.cache
+/Users/fayazkhan/Projects/PEOCMIS/DAL/obj/Debug/netstandard2.1/DAL.dll
+/Users/fayazkhan/Projects/PEOCMIS/DAL/obj/Debug/netstandard2.1/DAL.pdb
+/Users/fayazkhan/Projects/PEOCMIS/DAL/obj/Debug/netstandard2.1/DAL.csprojAssemblyReference.cache
+C:\Users\M Usman\Desktop\PEOCMIS\DAL\bin\Debug\netstandard2.1\DAL.deps.json
+C:\Users\M Usman\Desktop\PEOCMIS\DAL\bin\Debug\netstandard2.1\DAL.dll
+C:\Users\M Usman\Desktop\PEOCMIS\DAL\bin\Debug\netstandard2.1\DAL.pdb
+C:\Users\M Usman\Desktop\PEOCMIS\DAL\obj\Debug\netstandard2.1\DAL.csprojAssemblyReference.cache
+C:\Users\M Usman\Desktop\PEOCMIS\DAL\obj\Debug\netstandard2.1\DAL.AssemblyInfoInputs.cache
+C:\Users\M Usman\Desktop\PEOCMIS\DAL\obj\Debug\netstandard2.1\DAL.AssemblyInfo.cs
+C:\Users\M Usman\Desktop\PEOCMIS\DAL\obj\Debug\netstandard2.1\DAL.dll
+C:\Users\M Usman\Desktop\PEOCMIS\DAL\obj\Debug\netstandard2.1\DAL.pdb
+C:\Users\M Usman\Desktop\CDPM Desktop\PEOCMIS\DAL\bin\Debug\netstandard2.1\DAL.deps.json
+C:\Users\M Usman\Desktop\CDPM Desktop\PEOCMIS\DAL\bin\Debug\netstandard2.1\DAL.dll
+C:\Users\M Usman\Desktop\CDPM Desktop\PEOCMIS\DAL\bin\Debug\netstandard2.1\DAL.pdb
+C:\Users\M Usman\Desktop\CDPM Desktop\PEOCMIS\DAL\obj\Debug\netstandard2.1\DAL.csprojAssemblyReference.cache
+C:\Users\M Usman\Desktop\CDPM Desktop\PEOCMIS\DAL\obj\Debug\netstandard2.1\DAL.AssemblyInfoInputs.cache
+C:\Users\M Usman\Desktop\CDPM Desktop\PEOCMIS\DAL\obj\Debug\netstandard2.1\DAL.AssemblyInfo.cs
+C:\Users\M Usman\Desktop\CDPM Desktop\PEOCMIS\DAL\obj\Debug\netstandard2.1\DAL.dll
+C:\Users\M Usman\Desktop\CDPM Desktop\PEOCMIS\DAL\obj\Debug\netstandard2.1\DAL.pdb
+D:\data transfer\Mobilise one Folder\Mobilise Civil Protection APp\PEOCMIS\DAL\bin\Debug\netstandard2.1\DAL.deps.json
+D:\data transfer\Mobilise one Folder\Mobilise Civil Protection APp\PEOCMIS\DAL\bin\Debug\netstandard2.1\DAL.dll
+D:\data transfer\Mobilise one Folder\Mobilise Civil Protection APp\PEOCMIS\DAL\bin\Debug\netstandard2.1\DAL.pdb
+D:\data transfer\Mobilise one Folder\Mobilise Civil Protection APp\PEOCMIS\DAL\obj\Debug\netstandard2.1\DAL.csprojAssemblyReference.cache
+D:\data transfer\Mobilise one Folder\Mobilise Civil Protection APp\PEOCMIS\DAL\obj\Debug\netstandard2.1\DAL.AssemblyInfoInputs.cache
+D:\data transfer\Mobilise one Folder\Mobilise Civil Protection APp\PEOCMIS\DAL\obj\Debug\netstandard2.1\DAL.AssemblyInfo.cs
+D:\data transfer\Mobilise one Folder\Mobilise Civil Protection APp\PEOCMIS\DAL\obj\Debug\netstandard2.1\DAL.dll
+D:\data transfer\Mobilise one Folder\Mobilise Civil Protection APp\PEOCMIS\DAL\obj\Debug\netstandard2.1\DAL.pdb

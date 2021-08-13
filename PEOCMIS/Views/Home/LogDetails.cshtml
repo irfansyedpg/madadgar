@@ -1,0 +1,93 @@
+﻿@{
+    Layout = "~/Views/Shared/Master_page.cshtml";
+}
+
+
+<style type="text/css">
+    /* Set the size of the div element that contains the map */
+    #map {
+        height: 400px;
+        /* The height is 400 pixels */
+        width: 100%;
+        /* The width is the width of the web page */
+    }
+</style>
+@*<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAtZXg0silNQgaz3_vwi7ll7ErTMQe9q84"></script>*@
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCSNUzCDjt1SEhbn6EvYtyRL4TK-0m_BN8"></script>
+
+<body>
+   
+
+    <!-- ============================================================== -->
+    <div class="page-wrapper">
+        <div class="container-fluid">
+            <div id="map" style="height: 500px; width: auto;">
+            </div>
+
+        </div>
+
+
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Detail</h4>
+
+                        <div class="table-responsive">
+                            <table id="tbl_info" class="table table-striped table-bordered display no-wrap"
+                                   style="width:100%">
+                                <thead>
+                                    <tr>
+                                        
+                                        <th>Name</th>
+                                        <th>ContactNo</th>
+                                        <th>District</th>
+                                        <th>Date</th>
+                                        <th>Section</th>
+                                        <th>DisasterType</th>
+                                        <th>GPS</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Response Details</h4>
+
+                        <div class="table-responsive">
+                            <table id="tbl_data" class="table table-striped table-bordered display no-wrap"
+                                   style="width:100%">
+                                <thead>
+                                    <tr>
+                                        @*AppPK,b.Response,b.VarName,b.Section*@
+                               
+                                        <th>VarName</th>
+                                        <th>Response</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+<script src="~/MyScripts/logdetails.js"></script>
