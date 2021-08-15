@@ -17,7 +17,7 @@
     <Folder Include="Views\Shared\" />
     <Folder Include="Models\" />
     <Folder Include="Security\" />
-    <Folder Include="wwwroot\DisasterImages\" />
+    <Folder Include="wwwroot\DataManager\DisasterImages\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="DBContext" Version="1.0.0" />

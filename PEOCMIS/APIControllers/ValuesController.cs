@@ -294,6 +294,23 @@ namespace PEOCMIS.Controllers
 
         }
 
+
+        [Route("GetDistrictsAction")]
+        [HttpPost(Name = "GetDistrictsAction")]
+        public JsonResult GetDistrictsAction()
+        {
+            var result = _repo.FnGetDistricts();
+
+            string text = "success";
+            if (result == null)
+                text = "error";
+            return Json(new { message = text, result = result });
+
+        }
+
+
+
+
         [Route("DWRGet")]
         [HttpGet(Name = "DWRGet")]
         public JsonResult DWRGet()

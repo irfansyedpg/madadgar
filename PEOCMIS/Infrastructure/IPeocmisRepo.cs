@@ -58,5 +58,15 @@ namespace PEOCMIS.Infrastructure
         string FnEvacuationCentersCnt(int pk );
 
         int Add(ResponseTable newEmployee);
+
+        // insert into Riskassement
+
+        string FnRiskAssesmentCnt(MRiskAssesment riskassment);
+
+
+        List<VMRiskAssesment> FnGetRiskAssmentCnt();
+
+        string FnDeleteRiskAssmentCnt(int pk);
+
     }
 }

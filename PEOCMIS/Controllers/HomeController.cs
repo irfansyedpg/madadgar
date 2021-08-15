@@ -356,28 +356,63 @@ using Microsoft.AspNetCore.Http;
 
             
         [HttpPost]
-        public async Task<IActionResult> ImageAction( MRiskAssesment imageModel)
+        public async Task<IActionResult> InsertRiskAssesmentAction( MRiskAssesment imageModel)
         {
             if (ModelState.IsValid)
             {
                 //Save image to wwwroot/image
                 string wwwRootPath = _hostEnvironment.WebRootPath;
                 string fileName = Path.GetFileNameWithoutExtension(imageModel.ImageFile.FileName);
+
                 string extension = Path.GetExtension(imageModel.ImageFile.FileName);
+
                 imageModel.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                imageModel.Typee = extension;
+
                 string path = Path.Combine(wwwRootPath + "/DisasterImages/", fileName);
+
+
                 using (var fileStream = new FileStream(path, FileMode.Create))
                 {
                     await imageModel.ImageFile.CopyToAsync(fileStream);
                 }
+
+                var result = _repo.FnRiskAssesmentCnt(imageModel);
+
+
                 //Insert record
-            //    _context.Add(imageModel);
-              //  await _context.SaveChangesAsync();
+                //    _context.Add(imageModel);
+                //  await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(imageModel);
         }
 
-    
+
+        public JsonResult GetReiskassesmentAction()
+        {
+            var result = _repo.FnGetRiskAssmentCnt();
+
+            string text = "success";
+            if (result == null)
+                text = "error";
+            return Json(new { message = text, result = result });
+
+        }
+
+        public JsonResult ReiskassesmentAction(int PK)
+        {
+            var result = _repo.FnDeleteRiskAssmentCnt(PK);
+
+            string text = "success";
+            if (result == null)
+                text = "error";
+            return Json(new { message = text, result = result });
+
+        }
+
+
+
+
     }
 }

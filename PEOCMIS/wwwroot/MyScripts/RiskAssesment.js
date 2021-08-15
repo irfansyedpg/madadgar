@@ -3,11 +3,54 @@
 $(document).ready(function () {
 
 
+
+    GetData();
+
     $("#form_submit").submit(function (event) {
         event.preventDefault();
 
 
-        InsertData();
+
+
+        let name = document.forms["form_submit"]["name"].value;
+
+        let detail = document.getElementById("detail").value;
+   
+
+        console.log(document.getElementById("img").src)
+
+
+
+
+        if (document.getElementById("img").src < 1) {
+            toastr["error"]("Enter Value", 'Please Upload Image');
+
+            return false;
+        }
+
+
+
+        if (name == "") {
+               
+
+
+            toastr["error"]("Enter Value", 'Please Assesment Name!');
+
+            return false;
+        }
+
+        if (detail.length<2) {
+            toastr["error"]("Enter Value", 'Please Enter Assesment Detail!');
+
+            return false;
+        }
+
+
+       
+    
+
+
+       InsertData();
 
         return false;
     });
@@ -15,41 +58,6 @@ $(document).ready(function () {
 
 });
 
-
-function uploadfile() {
-
-
- 
-    //upload file is html tag for upload
-    var fileUpload = $("#uploadfile").get(0);
-    var files = fileUpload.files;
-    var data = new FormData();
-    if (files.length != 0) {
-        data.append(files[0].name, files[0]);
-
-        $.ajax({
-            //fileUploader.ashx is request function which will store the image in a folder on serer
-            url: "fileUploader.ashx",
-            type: "POST",
-            data: data,
-            contentType: false,
-            processData: false,
-            success: function (result) {
-                //console.log(result);
-                result = JSON.parse(result);
-                //result will get the name and url of image and then you can save in database 
-                $("#itempic").text(result.image.toLowerCase());
-
-
-            },
-            error: function (err) {
-                alert(err.statusText)
-            }
-        });
-
-    }
-
-}
 
 
 
@@ -64,13 +72,13 @@ function InsertData() {
 
 
     if (Flag == false) {
-        url = "Home/ImageAction";
+        url = "Home/InsertRiskAssesmentAction";
 
 
     }
 
     if (Flag == true) {
-        url = "ImageAction";
+        url = "InsertRiskAssesmentAction";
     }
 
 
@@ -80,9 +88,10 @@ function InsertData() {
     var files = fileUpload.files;
     var formData = new FormData();
 
-        formData.append("ImageFile", files[0]);
-        formData.append("Title","Title" );
-        formData.append("ImageName", "ImageName");
+    formData.append("ImageFile", files[0]);
+    formData.append("Title", $("#name").val() );
+    formData.append("Detail", $("#detail").val() );
+
     
 
     
@@ -93,7 +102,7 @@ function InsertData() {
 
     $.ajax({
         type: "POST",
-        url: "ImageAction",
+        url: url,
 
 
 
@@ -110,10 +119,24 @@ function InsertData() {
         success: function (response) {
             console.log(response);
             if (response.message == "error") {
-                toastr["error"]("this book", response.message);
+                toastr["error"]( response.message);
             }
             else {
-                toastr["success"](response.message, 'Success!');
+                toastr["success"]("Data Inserted Succefully", 'Success!');
+
+             
+                $("#name").val("");
+           //     $("#Detail").html('some_value');
+         
+            
+     
+                $("#uploadfile").val("");
+
+                GetData();
+         
+      
+
+
         
 
             }
@@ -129,14 +152,17 @@ function InsertData() {
 function previewimg(url) {
     var ext = $('#uploadfile').val().split('.').pop().toLowerCase();
     if ($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg']) == -1) {
-        alert('Only Images are Allowed!');
+  
+        toastr["error"]("Only Picture Formate allowed");
+        return false;
     }
 
     else {
         var file_size = $('#uploadfile')[0].files[0].size;
         if (file_size > 1048576) {
 
-            alert("Image size is greater than 1MB");
+
+            toastr["error"]("Picture Size should be less then 1 MB");
 
 
             return false;
@@ -155,4 +181,166 @@ function previewimg(url) {
 
 
 
+
+
+function GetData() {
+
+
+
+    var Pageurl = window.location.href;
+
+
+    var Flag = Pageurl.includes("Home");
+
+
+    if (Flag == false) {
+        url = "Home/GetReiskassesmentAction";
+
+
+    }
+
+    if (Flag == true) {
+        url = "GetReiskassesmentAction";
+    }
+
+    $.ajax({
+        type: "POST",
+        url: "GetReiskassesmentAction",
+
+        data: {},
+
+        dataType: "JSON",
+        success: function (response) {
+
+            if (response.message == 'error') {
+
+                toastr["error"]('Unable to Get Data', 'ERROR');
+
+
+            }
+            else {
+
+
+                var result = response.result;
+
+                PopulateTable(result);
+
+            }
+
+        },
+        error: function (status, error) {
+
+        },
+
+    });
+
+}
+function PopulateTable(result) {
+
+    $("#tbl_data").DataTable().destroy();
+    $("#tbl_data tbody").empty();
+
+    var index = 1;
+    for (var i = 0; i < result.length; i++) {
+
+        var rows = "";
+        console.log(result[i].department);
+
+        rows += "<td  style='font-weight: bold'>" + index +
+
+            "<td>" + result[i].title +
+            "<td>" + result[i].detail +
+            "<td><img id='timg' name='timg'  src='/DisasterImages/" + result[i].imageName+"'  style='background-size: contain; background-repeat: no-repeat; background-position: center; max-width:350px;  max-height:200px;'/>"
+
+
+
+           + "<td>" + result[i].pk +
+
+            "</td><td class='text-center align-middle'><div class='btn-group align-top'><a onclick='View(this)'><button class='btn btn-primary badge'data-toggle='tooltip' type='button'>Delete</button></a></td>"
+
+        var tbody = document.querySelector("#tbl_data tbody");
+        var tr = document.createElement("tr");
+        tr.innerHTML = rows;
+        tbody.appendChild(tr);
+        index++;
+
+
+    }
+}
+
+
+
+
+function View(ele) {
+    let logId = $(ele).closest("tr").find("td:eq(4)").text();
+
+
+    var r = confirm("ARE YOU SURE TO DELETE!  \n\nPress OK to Delete");
+    if (r == true) {
+
+        DeleteData(logId);
+
+    } else {
+
+
+    }
+}
+
+
+
+function DeleteData(pk) {
+
+
+
+    var Pageurl = window.location.href;
+
+
+    var Flag = Pageurl.includes("Home");
+    //var Flag1 = Pageurl.includes("OnlineServices");
+
+    if (Flag == false) {
+        url = "Home/ReiskassesmentAction";
+
+
+    }
+
+    if (Flag == true) {
+        url = "ReiskassesmentAction";
+    }
+
+    $.ajax({
+        type: "POST",
+        url: "ReiskassesmentAction",
+
+
+        data: { PK: pk },
+
+        dataType: "JSON",
+        success: function (response) {
+
+            if (response.message == 'error') {
+
+
+                toastr["error"]("Unable to Delete", 'Some thing is wrong!');
+            }
+            else {
+
+
+                var result = response.result;
+
+                toastr["success"]("Deleted", 'Data Delete Succefully');
+
+
+                GetData();
+
+            }
+
+        },
+        error: function (status, error) {
+
+        },
+
+    });
+
+}
 

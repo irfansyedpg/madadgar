@@ -9,10 +9,11 @@ namespace DAL.Models
     public class MRiskAssesment
     {
         [Key]
+        public int PK { get; set; }
+        public string Typee { get; set; }
         public string Title { get; set; }
-
+        public string Detail { get; set; }
         public string ImageName { get; set; }
-
         [NotMapped]
         [DisplayName("Upload File")]
         public IFormFile ImageFile { get; set; }

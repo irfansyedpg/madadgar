@@ -61,7 +61,10 @@ namespace DAL.DBContext
 
         // risk assesment
 
-        public DbSet<MRiskAssesment> CntxtRiskAssesment { get; set; }
+        public DbSet<VMRiskAssesment> CntxtRiskAssesment { get; set; }
+
+
+
 
 
     }

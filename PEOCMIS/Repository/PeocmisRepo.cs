@@ -651,6 +651,95 @@ namespace PEOCMIS.Repository
             return result;
         }
 
-       
+
+        [Obsolete]
+        public string FnRiskAssesmentCnt(MRiskAssesment riskassment)
+        {
+
+            try
+            {
+                var contt = _context.Database.ExecuteSqlCommand($"MD_Pro_Insert_RiskAssesment @Typee,@Title,@Detail,@ImageName",
+                           new SqlParameter("@Typee", riskassment.Typee),
+                           new SqlParameter("@Title", riskassment.Title),
+                           new SqlParameter("@Detail", riskassment.Detail),
+                           new SqlParameter("@ImageName", riskassment.ImageName)
+                
+
+
+
+                );
+
+                if (contt > 0)
+                {
+                    return "Success";
+                }
+                return "error";
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+        [Obsolete]
+        public List<VMRiskAssesment> FnGetRiskAssmentCnt()
+        {
+
+
+
+            try
+            {
+
+
+                return _context.CntxtRiskAssesment.FromSql($"MD_Pro_Get_RiskAssesment  "
+
+
+                ).AsEnumerable().ToList();
+
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+
+
+        }
+
+
+        [Obsolete]
+        public string FnDeleteRiskAssmentCnt(int pk)
+        {
+            try
+            {
+                var contt = _context.Database.ExecuteSqlCommand($"MD_Pro_Delete_RiskAssesment @pk",
+                           new SqlParameter("@pk", pk)
+
+                );
+
+                if (contt > 0)
+                {
+                    return "Success";
+                }
+                return "error";
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
+
+
+
     }
+
 }
