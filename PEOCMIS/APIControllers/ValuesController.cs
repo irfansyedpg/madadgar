@@ -234,10 +234,10 @@ namespace PEOCMIS.Controllers
         //end
         [Route("Signin")]
         [HttpPost(Name = "Signin")]
-        public IActionResult FnLogin([FromBody] UserLogin login)
+        public IActionResult FnLogin([FromBody] Login login)
 
         {
-            var result = _repo.FnLogin(login);
+            var result = _repo.Login(login);
             string text = "Success";
             if (result == null)
             {
@@ -320,7 +320,9 @@ namespace PEOCMIS.Controllers
 
             return Json(new { message = result });
         }
-            [Route("DWRGetbyDate")]
+           
+        
+        [Route("DWRGetbyDate")]
             [HttpPost(Name = "DWRGetbyDate")]
             public JsonResult DWRGetbyDate(string date)
 
@@ -329,5 +331,37 @@ namespace PEOCMIS.Controllers
 
             return Json(new { message = resultDate });
         }
+
+
+
+
+
+        [Route("GetTehsilAction")]
+        [HttpPost(Name = "GetTehsilAction")]
+        public JsonResult GetTehsilAction()
+        {
+            var result = _repo.FnGetTeshilCnt();
+
+            string text = "success";
+            if (result == null)
+                text = "error";
+            return Json(new { message = text, result = result });
+
+        }
+
+        [Route("GetReiskassesmentAction")]
+        [HttpPost(Name = "GetReiskassesmentAction")]
+        public JsonResult GetReiskassesmentAction()
+        {
+            var result = _repo.FnGetRiskAssmentCnt();
+
+            string text = "success";
+            if (result == null)
+                text = "error";
+            return Json(new { message = text, result = result });
+
+        }
+
+
     }
 }

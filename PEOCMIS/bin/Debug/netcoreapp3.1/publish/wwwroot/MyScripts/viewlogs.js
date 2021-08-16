@@ -1,15 +1,90 @@
 ﻿$(document).ready(function () {
 
 
-    FnLoadData();
-    
+
+
+
+
+    FnLoadData("0", "0", "0");
+    GetDistrict();
+
+
+
+
+
+
+    $("#Districts").change(function () {
+
+
+        
+
+
+        onccclick();
+
+ 
+    }); 
+
+    $("#distype").change(function () {
+       
+
+        onccclick();
+
+
+        
+    });
+
+
+    $("#section").change(function () {
+        
+
+        onccclick();
+     
+    });
+
+
+
  
 });
+
+
+function onccclick() {
+
+
+    var district = $("#Districts").val();
+    var distype = $('#distype option:selected').val();
+    var section = $("#section").val();
+
+
+    if (district == 'District' || district == null) {
+        district = "0";
+    }
+
+    if (distype == 'Types Of Disaster') {
+        distype = "0";
+    }
+    if (section == 'Section' || section == null) {
+        section = "0";
+
+    }
+
+    if (section == 'DNA') {
+        distype = "0";
+      
+
+
+    }
+
+    FnLoadData(district, distype, section);
+
+
+
+
+}
 var username = localStorage.getItem("userName");
 var ContactNo = localStorage.getItem("ContactNo");
 
 var table;
-function FnLoadData() {
+function FnLoadData(district, disastertype, section) {
 
     var url;
 
@@ -26,16 +101,24 @@ function FnLoadData() {
     if (Flag == true) {
         url = "MultiList";
     }
+
+    $("#tbl_data").DataTable().destroy();
+    $("#tbl_data tbody").empty();
     let logId = 0;
         $.ajax({
             type: "POST",
             url: "MultiList",
+            data: { district: district, disastertype: disastertype, section: section},
             dataType: "JSON",
             success: function (result) {
 
+
+
+
+               
+
             InitMap(result)
-            $("#tbl_data").DataTable().destroy();
-            $("#tbl_data tbody").empty();
+           
 
             var index = 1;
 
@@ -46,12 +129,17 @@ function FnLoadData() {
                 rows += "<td  style='font-weight: bold'>" + index +
 
                     "<td>" + result[i].logPK +
-                    "<td>" + result[i].userID +
+                    "<td>" + result[i].name +
+                    "<td>" + result[i].contactNo +
+                    "<td>" + result[i].district +
+                    "<td>" + result[i].section +
+                    "<td>" + result[i].disasterType +
+
                     "<td>" + result[i].datee +
-                    "<td> " + result[i].timee +
+
                     "<td>" + result[i].lat +
                     "<td>" + result[i].long +
-                    "<td>" + result[i].section +
+                  
                     "</td><td class='text-center align-middle'><div class='btn-group align-top'><a onclick='View(this)'><button class='btn btn-primary badge'data-toggle='tooltip' type='button'>View</button></a></td>"
 
 
@@ -132,6 +220,10 @@ function FnLoadData() {
 
 
 function InitMap(locations) {
+
+    console.log(locations)
+
+
     var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 13,
         center: new google.maps.LatLng(locations[0].lat, locations[0].long),
@@ -140,16 +232,18 @@ function InitMap(locations) {
     var infowindow = new google.maps.InfoWindow();
     var marker, i;
     for (i = 0; i < locations.length; i++) {
+        console.log( locations[i].contactNo )
         marker = new google.maps.Marker({
 
+            
             position: new google.maps.LatLng(locations[i].lat, locations[i].long),
             map: map,
-            title: 'username: ' + username + ' contact no ' + ContactNo
+            title: 'username: ' + locations[i].name + ' contact no ' + locations[i].contactNo
         });
 
         google.maps.event.addListener(marker, 'click', (function (marker, i) {
             return function () {
-                infowindow.setContent('username: ' + username + ' contact no ' + ContactNo);
+                infowindow.setContent('username: ' + name + ' contact no ' + contactNo);
                 infowindow.open(map, marker);
             }
         })(marker, i));
@@ -174,5 +268,67 @@ function View(ele) {
 }
 
 function summaryFilter(data) {
+
+}
+
+
+function GetDistrict() {
+
+
+
+    var Pageurl = window.location.href;
+
+
+    var Flag = Pageurl.includes("Home");
+
+
+    if (Flag == false) {
+        url = "Home/GetDistrictsAction";
+
+
+    }
+
+    if (Flag == true) {
+        url = "GetDistrictsAction";
+    }
+
+    $.ajax({
+        type: "POST",
+        url: "GetDistrictsAction",
+
+        data: {},
+
+        dataType: "JSON",
+        success: function (response) {
+
+            if (response.message == 'error') {
+
+
+
+                alert('error');
+            }
+            else {
+
+
+                var result = response.result;
+
+
+                for (var i = 0; i < result.length; i++) {
+
+
+
+
+                    $('#Districts')
+                        .append($('<option>', { value: result[i].pk })
+                            .text(result[i].district));
+                }
+            }
+
+        },
+        error: function (status, error) {
+
+        },
+
+    });
 
 }

@@ -5,6 +5,7 @@ $(document).ready(function () {
 
     GetData();
 
+
  
 
   
@@ -136,8 +137,10 @@ function GetData() {
             }
             else {
 
-
                 var result = response.result;
+             
+
+
 
                 PopulateTable(result);
 

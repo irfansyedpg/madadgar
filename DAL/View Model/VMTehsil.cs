@@ -8,5 +8,6 @@ namespace DAL.ViewModel
         public string Tehsil { get; set; }
 
         public int PK { get; set; }
+        public int Districtid { get; set; }
     }
 }

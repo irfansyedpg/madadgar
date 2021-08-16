@@ -15,19 +15,21 @@ function FnLoadData() {
     //var Flag1 = Pageurl.includes("OnlineServices");
 
     if (Flag == false) {
-        url = "Home/ActionLogdetails";
+        url = "Home/GetLogsDetailAction";
 
 
     }
 
     if (Flag == true) {
-        url = "ActionLogdetails";
+        url = "GetLogsDetailAction";
     }
+
+
 
     let logId = localStorage.getItem("logId");
     $.ajax({
         type: "POST",
-        url: "ActionLogdetails",
+        url: "GetLogsDetailAction",
         datatype: "json",
         data: { logId: logId,},
         dataType: "JSON",
@@ -39,9 +41,14 @@ function FnLoadData() {
             //console.log('result', result)
 
             InitMap(result)
+            console.log(result);
 
             $("#tbl_data").DataTable().destroy();
             $("#tbl_data tbody").empty();
+
+            $("#tbl_info").DataTable().destroy();
+            $("#tbl_info tbody").empty();
+
 
             var index = 1;
 
@@ -49,12 +56,10 @@ function FnLoadData() {
 
                 var rows = "";
 
-                rows += "<td  style='font-weight: bold'>" + index +
+                rows += "<td  style='font-weight: bold'>" + 
                     //AppPK, b.Response, b.VarName, b.Section 
-                    "<td>" + result[i].appPK +
+                      result[i].varname +
                     "<td>" + result[i].response +
-                    "<td>" + result[i].varName +
-                    "<td> " + result[i].section +
                     "</td>"
 
 
@@ -66,9 +71,39 @@ function FnLoadData() {
 
 
             }
-             $('#tableFIR').DataTable();
 
-            $('#cgrid').show();
+
+            /// for table info
+
+
+
+            var rows = "";
+
+            rows += "<td  style='font-weight: bold'>" + result[0].name +
+                //AppPK, b.Response, b.VarName, b.Section 
+             
+             
+                "<td>" + result[0].contactNo +
+                "<td>" + result[0].district +
+                "<td>" + result[0].datee +
+                "<td>" + result[0].section +
+                "<td>" + result[0].disasterType +
+                "<td>" + result[0].lat +", "+ result[0].long +
+                "</td>"
+
+            var tbody = document.querySelector("#tbl_info tbody");
+            var tr = document.createElement("tr");
+            tr.innerHTML = rows;
+            tbody.appendChild(tr);
+       
+
+
+            //
+
+
+           // $('#tbl_data').DataTable();
+
+           // $('#cgrid').show();
             table = $("#tbl_data").DataTable({
 
                 "iDisplayLength": 25,
@@ -141,7 +176,7 @@ function FnLoadData() {
 
 
 function InitMap(locations) {
-    console.log(locations)
+   
     var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 13,
         center: new google.maps.LatLng(locations[0].lat, locations[0].long),
@@ -151,7 +186,7 @@ function InitMap(locations) {
     var infowindow = new google.maps.InfoWindow();
     var marker, i;
     for (i = 0; i < locations.length; i++) {
-        console.log(locations[i].lat);
+     
         marker = new google.maps.Marker({
 
             position: new google.maps.LatLng(locations[i].lat, locations[i].long),

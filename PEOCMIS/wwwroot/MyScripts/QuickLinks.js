@@ -137,10 +137,12 @@ function GetData() {
             }
             else {
 
-
+                var result = response.result;
              
 
-                GetDistrict();
+
+
+                PopulateTable(result);
 
             }
 
