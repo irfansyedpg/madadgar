@@ -16,5 +16,7 @@ namespace DAL.Models
         public string Type { get; set; }
         public string Password { get; set; }
         public string CNIC { get; set; }
+        public string Latt { get; set; }
+        public string Longg { get; set; }
     }
 }

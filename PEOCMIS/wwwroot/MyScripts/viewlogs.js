@@ -151,9 +151,9 @@ function FnLoadData(district, disastertype, section) {
 
 
             }
-            // $('#tableFIR').DataTable();
+            // $('#tbl_data').DataTable();
 
-            //$('#cgrid').show();
+            $('#tbl_data').show();
             table = $("#tbl_data").DataTable({
 
                 "iDisplayLength": 25,

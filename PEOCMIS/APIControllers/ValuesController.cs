@@ -23,6 +23,8 @@ namespace PEOCMIS.Controllers
         [Obsolete]
         private readonly IHostingEnvironment hostingEnvironment;
 
+     
+
         [Obsolete]
         public ValuesController(IPeocmisRepo Repo, IWebHostEnvironment hostEnvironment,
              IHostingEnvironment hostingEnvironment)
@@ -99,6 +101,13 @@ namespace PEOCMIS.Controllers
 
             return BadRequest("error ");
         }
+
+
+        
+
+
+
+
         [Route("InsertResponseMedia")]
         [HttpPost(Name = "InsertResponseMedia")]
 
@@ -231,6 +240,46 @@ namespace PEOCMIS.Controllers
             }
             return Json(new { message = text , lastId = lastId });
         }
+
+
+
+        //Sign up function
+        [Route("RDImageAction")]
+        [HttpPost(Name = "RDImageAction")]
+        public async Task<IActionResult> RDImageAction(MRDImage ImageModel)
+        {
+            if (ModelState.IsValid)
+            {
+                //Save image to wwwroot/image
+                string wwwRootPath = _appEnvironment.WebRootPath;
+                string fileName = Path.GetFileNameWithoutExtension(ImageModel.ImageFile.FileName);
+
+                string extension = Path.GetExtension(ImageModel.ImageFile.FileName);
+
+                ImageModel.Path = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+             //   ImageModel.Typee = extension;
+
+                string path = Path.Combine(wwwRootPath + "/ReportDisaterImages/", fileName);
+
+
+                using (var fileStream = new FileStream(path, FileMode.Create))
+                {
+                    await ImageModel.ImageFile.CopyToAsync(fileStream);
+                }
+
+                var result = _repo.FnRDImagesCnt(ImageModel);
+
+
+                //Insert record
+                //    _context.Add(ImageModel);
+                //  await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(ImageModel);
+        }
+
+
+
         //end
         [Route("Signin")]
         [HttpPost(Name = "Signin")]
@@ -354,6 +403,34 @@ namespace PEOCMIS.Controllers
         public JsonResult GetReiskassesmentAction()
         {
             var result = _repo.FnGetRiskAssmentCnt();
+
+            string text = "success";
+            if (result == null)
+                text = "error";
+            return Json(new { message = text, result = result });
+
+        }
+
+
+        [Route("GetFlyersAction")]
+        [HttpPost(Name = "GetFlyersAction")]
+        public JsonResult GetFlyersAction()
+        {
+            var result = _repo.FnGetFlyersCnt();
+
+            string text = "success";
+            if (result == null)
+                text = "error";
+            return Json(new { message = text, result = result });
+
+        }
+
+
+        [Route("InsertComplaintAction")]
+        [HttpPost(Name = "InsertComplaintAction")]
+        public JsonResult InsertComplaintAction(MComplaints distt)
+        {
+            var result = _repo.FnComplaintsCnt(distt);
 
             string text = "success";
             if (result == null)

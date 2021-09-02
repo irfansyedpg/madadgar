@@ -12,5 +12,8 @@ namespace DAL.ViewModel
         public string Type { get; set; }
         public string DateRegistration { get; set; }
         public int PK { get; set; }
+        public string Latt { get; set; }
+        public string Longg { get; set; }
+        public int Status { get; set; }
     }
 }

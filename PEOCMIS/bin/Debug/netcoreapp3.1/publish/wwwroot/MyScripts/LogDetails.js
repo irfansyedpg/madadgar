@@ -6,6 +6,99 @@
 });
 
 
+
+
+
+
+function GetRDImages(logidd) {
+
+
+
+    var Pageurl = window.location.href;
+
+
+    var Flag = Pageurl.includes("Home");
+
+
+    if (Flag == false) {
+        url = "Home/GetRDImgagesAction";
+
+
+    }
+
+    if (Flag == true) {
+        url = "GetRDImgagesAction";
+    }
+
+    $.ajax({
+        type: "POST",
+        url: "GetRDImgagesAction",
+
+        data: { logid: logidd},
+
+        dataType: "JSON",
+        success: function (response) {
+
+            if (response.message == 'error') {
+
+                toastr["error"]('Unable to Get Data', 'ERROR');
+
+
+            }
+            else {
+
+
+                var result = response.result;
+
+                PopulateTable(result);
+
+            }
+
+        },
+        error: function (status, error) {
+
+        },
+
+    });
+
+}
+
+
+function PopulateTable(result) {
+
+    $("#tbl_image").DataTable().destroy();
+    $("#tbl_image tbody").empty();
+
+    var index = 1;
+    for (var i = 0; i < result.length; i++) {
+
+        var rows = "";
+        console.log(result[i].department);
+
+        rows += "<td style='font-weight: bold'>" + "Picture "+ index +
+
+          
+            "<td><img id='timg' name='timg'  src='/pdmamadadgar/ReportDisaterImages/" + result[i].path + "'  style='background-size: contain; background-repeat: no-repeat; background-position: center; max-width:550px;  max-height:300px;'/>"
+
+
+        +
+            "</td>"
+
+        var tbody = document.querySelector("#tbl_image tbody");
+        var tr = document.createElement("tr");
+        tr.innerHTML = rows;
+        tbody.appendChild(tr);
+        index++;
+
+
+    }
+}
+
+
+
+
+
+
 var table;
 function FnLoadData() {
     var url;
@@ -95,7 +188,12 @@ function FnLoadData() {
             var tr = document.createElement("tr");
             tr.innerHTML = rows;
             tbody.appendChild(tr);
-       
+
+
+            if (result[0].section == "Report Disaster") {
+                GetRDImages(logId);
+
+            }
 
 
             //

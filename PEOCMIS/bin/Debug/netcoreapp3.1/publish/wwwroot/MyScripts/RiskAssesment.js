@@ -235,6 +235,9 @@ function GetData() {
     });
 
 }
+
+
+
 function PopulateTable(result) {
 
     $("#tbl_data").DataTable().destroy();

@@ -39,6 +39,12 @@ namespace DAL.DBContext
         [Obsolete]
         public DbQuery<VMUserInfo> UserInfoinfo { get; set; }
 
+   
+
+
+
+        [Obsolete]
+        public DbQuery<VMComplaint> Complaintinfo { get; set; }
 
         [Obsolete]
         public DbQuery<VMLogDetails> LogsDetailinfo { get; set; }
@@ -62,6 +68,11 @@ namespace DAL.DBContext
         // risk assesment
 
         public DbSet<VMRiskAssesment> CntxtRiskAssesment { get; set; }
+
+
+        public DbSet<VMFlyers> CntxtFlyers { get; set; }
+
+        public DbSet<VMRDImage> CntxtRDImages { get; set; }
 
 
 

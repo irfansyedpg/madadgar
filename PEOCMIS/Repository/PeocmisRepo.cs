@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using DAL.DBContext;
+﻿using DAL.DBContext;
 using DAL.Models;
 using DAL.ViewModel;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using PEOCMIS.Infrastructure;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
 
 
 namespace PEOCMIS.Repository
@@ -32,7 +32,7 @@ namespace PEOCMIS.Repository
             var result = _context.SaveChanges();
             return result;
         }
-       
+
         [Obsolete]
         public string LogsInsertion(Logs logs)
         {
@@ -51,7 +51,7 @@ namespace PEOCMIS.Repository
                     new SqlParameter("@DistrictId", logs.DistrictId),
                     new SqlParameter("@DisasterType", logs.DisasterType)
 
-                ) ;
+                );
                 //cmd.Parameters.Add(outPutVal);
 
                 if (getdetailprojectlist > 0)
@@ -94,7 +94,7 @@ namespace PEOCMIS.Repository
                 return _context.UsersInfo.FromSql($"MD_Proc_login @Email, @Password", new SqlParameter("@Email", login.Email), new SqlParameter("@Password", login.Password)).AsEnumerable()
                                     .FirstOrDefault();
             }
-            
+
             catch (Exception)
             {
 
@@ -114,7 +114,7 @@ namespace PEOCMIS.Repository
             try
             {
 
-               
+
                 return _context.ErCntinfo.FromSql($"MD_Pro_Insert_EmergencyContact  @Department, @Contact, @Districtid",
                    new SqlParameter("@Department", ErCnt.Department),
                    new SqlParameter("@Contact", ErCnt.Contact),
@@ -153,7 +153,7 @@ namespace PEOCMIS.Repository
         }
 
         [Obsolete]
-  
+
 
         public List<VMDistricts> FnGetDistricts()
         {
@@ -171,7 +171,7 @@ namespace PEOCMIS.Repository
         }
 
         [Obsolete]
-        public string FnDeltEmrCnt(int pk )
+        public string FnDeltEmrCnt(int pk)
         {
             try
             {
@@ -293,7 +293,7 @@ namespace PEOCMIS.Repository
             }
         }
 
-     
+
 
         [Obsolete]
         public List<VMEvacuationCenter> FnEvacuationCenterCnt(MEvacuationCenter ErCnt)
@@ -352,31 +352,59 @@ namespace PEOCMIS.Repository
         [Obsolete]
         public List<VMUserInfo> FnGetUserInfoCenter(string type)
         {
-           
-       
-
-              try
-                {
 
 
-                    return _context.UserInfoinfo.FromSql($"MD_Pro_Get_UserInfo  @Type",
-                       new SqlParameter("@Type", type)
-                   
 
-                    ).AsEnumerable().ToList();
+            try
+            {
 
 
-                }
-                catch (Exception)
-                {
+                return _context.UserInfoinfo.FromSql($"MD_Pro_Get_UserInfo  @Type",
+                   new SqlParameter("@Type", type)
 
-                    throw;
-                }
 
+                ).AsEnumerable().ToList();
 
 
             }
+            catch (Exception)
+            {
 
+                throw;
+            }
+
+
+
+        }
+
+
+
+        [Obsolete]
+        public List<VMComplaint> FnGetComplaintCenter()
+        {
+
+
+
+            try
+            {
+
+
+                return _context.Complaintinfo.FromSql($"MD_Pro_Get_Complaints "
+
+
+                ).AsEnumerable().ToList();
+
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+
+
+        }
 
 
         [Obsolete]
@@ -496,7 +524,36 @@ namespace PEOCMIS.Repository
 
 
         [Obsolete]
-        public string FnTehsilCnt(string tehsil,int distid)
+        public string FnUpdateUserInfo(int UserId, int Status)
+        {
+            try
+            {
+                var contt = _context.Database.ExecuteSqlCommand($"MD_Pro_Update_UserInfo_Status @UserId,@Status",
+                   new SqlParameter("@UserId", UserId),
+                   new SqlParameter("@Status", Status)
+
+
+                );
+
+                if (contt > 0)
+                {
+                    return "Success";
+                }
+                return "error";
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+
+        }
+
+
+        [Obsolete]
+        public string FnTehsilCnt(string tehsil, int distid)
         {
 
 
@@ -542,7 +599,7 @@ namespace PEOCMIS.Repository
         [Obsolete]
         public List<LogsDetails> LogsDetails(int LogPK)
         {
-         //   return _context.LogsDetails.FromSql($"MD_Pro_Log_View_Details {LogPK}").AsEnumerable().ToList();
+            //   return _context.LogsDetails.FromSql($"MD_Pro_Log_View_Details {LogPK}").AsEnumerable().ToList();
 
 
             var result = _context.LogsDetails.FromSql($"MD_Pro_Log_View_Details @LogPK",
@@ -567,7 +624,7 @@ namespace PEOCMIS.Repository
             {
 
 
-             
+
                 var result = _context.LogsDetailinfo.FromSql($"MD_Pro_Log_View_Details @LogPK",
 
                      new SqlParameter("@LogPK", logid)
@@ -605,7 +662,7 @@ namespace PEOCMIS.Repository
 
             try
             {
-                var signupDetailsList = _context.Database.ExecuteSqlCommand($"MD_Proc_Sigup @Name, @ContactNo,@District,@Tehsil,@Address,@Email,@Type,@Password,@CNIC",
+                var signupDetailsList = _context.Database.ExecuteSqlCommand($"MD_Proc_Sigup @Name, @ContactNo,@District,@Tehsil,@Address,@Email,@Type,@Password,@CNIC,@Latt,@Longg",
                     new SqlParameter("@Name", signup.Name),
                     new SqlParameter("@ContactNo", signup.ContactNo),
                     new SqlParameter("@District", signup.District),
@@ -614,7 +671,9 @@ namespace PEOCMIS.Repository
                     new SqlParameter("@Email", signup.Email),
                     new SqlParameter("@Type", signup.Type),
                     new SqlParameter("@Password", signup.Password),
-                    new SqlParameter("@CNIC", signup.CNIC)
+                    new SqlParameter("@CNIC", signup.CNIC),
+                    new SqlParameter("@CNIC", signup.Latt),
+                    new SqlParameter("@CNIC", signup.Longg)
 
                 );
                 if (signupDetailsList > 0)
@@ -631,7 +690,7 @@ namespace PEOCMIS.Repository
         }
 
 
-    
+
         //end
         [Obsolete]
         public List<DWRView> DWRViews()
@@ -663,7 +722,103 @@ namespace PEOCMIS.Repository
                            new SqlParameter("@Title", riskassment.Title),
                            new SqlParameter("@Detail", riskassment.Detail),
                            new SqlParameter("@ImageName", riskassment.ImageName)
-                
+
+
+
+
+                );
+
+                if (contt > 0)
+                {
+                    return "Success";
+                }
+                return "error";
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+
+        [Obsolete]
+        public string FnFlyersCnt(MFlyers riskassment)
+        {
+
+            try
+            {
+                var contt = _context.Database.ExecuteSqlCommand($"MD_Pro_Insert_Flyers @Title,@ImageName",
+
+                           new SqlParameter("@Title", riskassment.Title),
+
+                           new SqlParameter("@ImageName", riskassment.ImageName)
+
+
+
+
+                );
+
+                if (contt > 0)
+                {
+                    return "Success";
+                }
+                return "error";
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+        [Obsolete]
+        public string FnComplaintsCnt(MComplaints riskassment)
+        {
+
+            try
+            {
+                var contt = _context.Database.ExecuteSqlCommand($"MD_Pro_Insert_Complaints @Title,@Detail,@UserId,@Dated",
+
+                           new SqlParameter("@Title", riskassment.Title),
+                           new SqlParameter("@Detail", riskassment.Detail),
+                           new SqlParameter("@UserId", riskassment.UserId),
+                           new SqlParameter("@Dated", riskassment.Dated)
+
+
+
+
+                );
+
+                if (contt > 0)
+                {
+                    return "Success";
+                }
+                return "error";
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+        [Obsolete]
+        public string FnRDImagesCnt(MRDImage riskassment)
+        {
+
+            try
+            {
+                var contt = _context.Database.ExecuteSqlCommand($"MD_Pro_RD_images @Path,@LogId",
+                           new SqlParameter("@Path", riskassment.Path),
+                           new SqlParameter("@LogId", riskassment.LogId)
+
 
 
 
@@ -712,6 +867,64 @@ namespace PEOCMIS.Repository
         }
 
 
+
+
+        [Obsolete]
+        public List<VMFlyers> FnGetFlyersCnt()
+        {
+
+
+
+            try
+            {
+
+
+                return _context.CntxtFlyers.FromSql($"MD_Pro_Get_Flyers  "
+
+
+                ).AsEnumerable().ToList();
+
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+
+
+        }
+
+
+        [Obsolete]
+        public List<VMRDImage> FnGetRDImagesCnt(int logid)
+        {
+
+
+
+            try
+            {
+
+
+                return _context.CntxtRDImages.FromSql($"MD_Pro_Get_RDImages @LogId",
+                           new SqlParameter("@LogId", logid)
+
+
+                ).AsEnumerable().ToList();
+
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+
+
+        }
+
         [Obsolete]
         public string FnDeleteRiskAssmentCnt(int pk)
         {
@@ -739,6 +952,31 @@ namespace PEOCMIS.Repository
 
 
 
+
+        [Obsolete]
+        public string FnFlyersCnt(int pk)
+        {
+            try
+            {
+                var contt = _context.Database.ExecuteSqlCommand($"MD_Pro_Delete_Flyers @pk",
+                           new SqlParameter("@pk", pk)
+
+                );
+
+                if (contt > 0)
+                {
+                    return "Success";
+                }
+                return "error";
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
 
     }
 

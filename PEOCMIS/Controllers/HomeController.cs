@@ -62,10 +62,23 @@ using Microsoft.AspNetCore.Http;
             return View("UploadRiskAsmnt", "Master_page");
         }
 
+
+        [AuthorizedAction]
+        public IActionResult Flyers()
+        {
+            return View("Flyers", "Master_page");
+        }
+
         [AuthorizedAction]
         public IActionResult UserInfoAsmnt()
         {
             return View("UserInfo", "Master_page");
+        }
+
+        [AuthorizedAction]
+        public IActionResult ComplaintsAsmnt()
+        {
+            return View("Complaints", "Master_page");
         }
 
         [AuthorizedAction]
@@ -255,6 +268,31 @@ using Microsoft.AspNetCore.Http;
         }
 
 
+        // UserInfo
+        public JsonResult UpdateUserInfoAction(int UserId,int Status)
+        {
+            var result = _repo.FnUpdateUserInfo(UserId, Status);
+
+            string text = "success";
+            if (result == null)
+                text = "error";
+            return Json(new { message = text, result = result });
+
+        }
+
+        // Get Complaint
+        public JsonResult GetComplaintAction(string type)
+        {
+            var result = _repo.FnGetComplaintCenter();
+
+            string text = "success";
+            if (result == null)
+                text = "error";
+            return Json(new { message = text, result = result });
+
+        }
+
+
 
         // District
         public JsonResult InsertDistrictAction(string distt)
@@ -400,6 +438,30 @@ using Microsoft.AspNetCore.Http;
 
         }
 
+
+        public JsonResult GetFlyersAction()
+        {
+            var result = _repo.FnGetFlyersCnt();
+
+            string text = "success";
+            if (result == null)
+                text = "error";
+            return Json(new { message = text, result = result });
+
+        }
+
+
+        public JsonResult GetRDImgagesAction(int logid)
+        {
+            var result = _repo.FnGetRDImagesCnt(logid);
+
+            string text = "success";
+            if (result == null)
+                text = "error";
+            return Json(new { message = text, result = result });
+
+        }
+
         public JsonResult ReiskassesmentAction(int PK)
         {
             var result = _repo.FnDeleteRiskAssmentCnt(PK);
@@ -413,6 +475,53 @@ using Microsoft.AspNetCore.Http;
 
 
 
+        // Flyers... 
+
+
+        [HttpPost]
+        public async Task<IActionResult> InsertFlyersAction(MFlyers imageModel)
+        {
+            if (ModelState.IsValid)
+            {
+                //Save image to wwwroot/image
+                string wwwRootPath = _hostEnvironment.WebRootPath;
+                string fileName = Path.GetFileNameWithoutExtension(imageModel.ImageFile.FileName);
+
+                string extension = Path.GetExtension(imageModel.ImageFile.FileName);
+
+                imageModel.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+              
+
+                string path = Path.Combine(wwwRootPath + "/Flyers/", fileName);
+
+
+                using (var fileStream = new FileStream(path, FileMode.Create))
+                {
+                    await imageModel.ImageFile.CopyToAsync(fileStream);
+                }
+
+                var result = _repo.FnFlyersCnt(imageModel);
+
+
+                //Insert record
+                //    _context.Add(imageModel);
+                //  await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(imageModel);
+        }
+
+
+        public JsonResult DeleteFlyersAction(int PK)
+        {
+            var result = _repo.FnFlyersCnt(PK);
+
+            string text = "success";
+            if (result == null)
+                text = "error";
+            return Json(new { message = text, result = result });
+
+        }
 
     }
 }

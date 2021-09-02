@@ -36,6 +36,11 @@ namespace PEOCMIS.Infrastructure
     
         List<VMUserInfo> FnGetUserInfoCenter(string type);
 
+   
+        string FnUpdateUserInfo(int UserID,int Status);
+
+        List<VMComplaint> FnGetComplaintCenter();
+
         List<VMLogDetails> FnLogDetailCenter(int logId);
 
         List<VMDistricts> FnGetDistricts();
@@ -63,10 +68,25 @@ namespace PEOCMIS.Infrastructure
 
         string FnRiskAssesmentCnt(MRiskAssesment riskassment);
 
+        string FnFlyersCnt(MFlyers riskassment);
+
+
+        string FnComplaintsCnt(MComplaints cmplt);
+
+
+        string FnRDImagesCnt(MRDImage riskassment);
+
 
         List<VMRiskAssesment> FnGetRiskAssmentCnt();
 
+        List<VMFlyers> FnGetFlyersCnt();
+
+        List<VMRDImage> FnGetRDImagesCnt(int logid);
+
+
         string FnDeleteRiskAssmentCnt(int pk);
+
+        string FnFlyersCnt(int pk);
 
     }
 }
