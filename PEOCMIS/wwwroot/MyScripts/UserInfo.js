@@ -117,6 +117,13 @@ function PopulateTable(result) {
 
 
     }
+
+    $('#tbl_data').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            'csv', 'excel', 'pdf'
+        ]
+    });
 }
 
 

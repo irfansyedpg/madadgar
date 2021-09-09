@@ -672,8 +672,8 @@ namespace PEOCMIS.Repository
                     new SqlParameter("@Type", signup.Type),
                     new SqlParameter("@Password", signup.Password),
                     new SqlParameter("@CNIC", signup.CNIC),
-                    new SqlParameter("@CNIC", signup.Latt),
-                    new SqlParameter("@CNIC", signup.Longg)
+                    new SqlParameter("@Latt", signup.Latt),
+                    new SqlParameter("@Longg", signup.Longg)
 
                 );
                 if (signupDetailsList > 0)
@@ -750,11 +750,12 @@ namespace PEOCMIS.Repository
 
             try
             {
-                var contt = _context.Database.ExecuteSqlCommand($"MD_Pro_Insert_Flyers @Title,@ImageName",
+                var contt = _context.Database.ExecuteSqlCommand($"MD_Pro_Insert_Flyers @Title,@ImageName,@Typee",
 
                            new SqlParameter("@Title", riskassment.Title),
 
-                           new SqlParameter("@ImageName", riskassment.ImageName)
+                           new SqlParameter("@ImageName", riskassment.ImageName),
+                           new SqlParameter("@Typee", riskassment.Typee)
 
 
 

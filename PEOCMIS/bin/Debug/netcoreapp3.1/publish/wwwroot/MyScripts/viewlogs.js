@@ -151,61 +151,15 @@ function FnLoadData(district, disastertype, section) {
 
 
             }
-            // $('#tableFIR').DataTable();
 
-            //$('#cgrid').show();
-            table = $("#tbl_data").DataTable({
+                $('#tbl_data').DataTable({
+                    dom: 'Bfrtip',
+                    buttons: [
+                        'csv', 'excel', 'pdf'
+                    ]
+                });
+            
 
-                "iDisplayLength": 25,
-                dom: "Bfrtip",
-                buttons: [
-                    {
-                        extend: "copy",
-                        className: "btn-sm"
-                    },
-                    {
-                        extend: "csv",
-                        className: "btn-sm"
-                    },
-                    {
-                        extend: "excel",
-                        className: "btn-sm"
-                    },
-                    {
-                        extend: "pdfHtml5",
-                        className: "btn-sm"
-                    },
-                    {
-                        extend: "print",
-                        className: "btn-sm"
-                    },
-                ],
-
-            });
-
-
-
-            TableManageButtons = function () {
-                "use strict";
-                return {
-                    init: function () {
-                        handleDataTableButtons();
-                    }
-                };
-            }
-                ();
-
-
-            // barchartnew(ActiveUsers, InActiveUsers);
-            table.on('search.dt', function () {
-                var data = table.rows({ filter: 'applied' }).data();
-                summaryFilter(data);
-            });
-            table.on('order.dt', function () {
-                var data = table.rows({ filter: 'applied' }).data();
-                summaryFilter(data);
-            });
-            summaryFilter(table.rows().data());
 
         },
 

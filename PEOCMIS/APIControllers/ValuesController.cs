@@ -428,7 +428,7 @@ namespace PEOCMIS.Controllers
 
         [Route("InsertComplaintAction")]
         [HttpPost(Name = "InsertComplaintAction")]
-        public JsonResult InsertComplaintAction(MComplaints distt)
+        public JsonResult InsertComplaintAction([FromBody] MComplaints distt)
         {
             var result = _repo.FnComplaintsCnt(distt);
 

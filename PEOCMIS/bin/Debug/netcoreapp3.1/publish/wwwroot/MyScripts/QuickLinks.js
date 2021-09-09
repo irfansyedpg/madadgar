@@ -182,6 +182,13 @@ function PopulateTable(result) {
 
 
     }
+
+    $('#tbl_data').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            'csv', 'excel', 'pdf'
+        ]
+    });
 }
 function View(ele) {
     let logId = $(ele).closest("tr").find("td:eq(3)").text();

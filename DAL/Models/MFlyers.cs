@@ -13,6 +13,8 @@ namespace DAL.Models
    
         public string Title { get; set; }
 
+        public string Typee { get; set; }
+
         public string ImageName { get; set; }
         [NotMapped]
         [DisplayName("Upload File")]

@@ -16,5 +16,7 @@ namespace DAL.ViewModel
 
         public string ImageName { get; set; }
 
+        public string Typee { get; set; }
+
     }
 }
