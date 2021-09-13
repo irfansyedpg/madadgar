@@ -269,6 +269,10 @@ function PopulateTable(result) {
 
 
     }
+
+   
+        $('#tbl_data td').css('white-space', 'initial');
+   
 }
 
 

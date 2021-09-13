@@ -92,6 +92,8 @@ function PopulateTable(result) {
 
 
     }
+
+    $('#tbl_image td').css('white-space', 'initial');
 }
 
 
@@ -173,6 +175,11 @@ function FnLoadData() {
 
 
             }
+
+
+
+            $('#tbl_data td').css('white-space', 'initial');
+
 
 
             /// for table info

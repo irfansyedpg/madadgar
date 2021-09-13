@@ -150,7 +150,9 @@ function FnLoadData(district, disastertype, section) {
                 index++;
 
 
-            }
+                }
+
+                $('#tbl_data td').css('white-space', 'initial');
 
                 $('#tbl_data').DataTable({
                     dom: 'Bfrtip',

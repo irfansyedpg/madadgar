@@ -90,9 +90,10 @@ function PopulateTable(result) {
          
             "<td> " + result[i].pk +
 
-            "</td>"
+      
 
-         //   "< td class='text-center align-middle' > <div class='btn-group align-top'><a onclick='View(this)'><button class='btn btn-primary badge' data-toggle='tooltip' type='button'>Delete</button></a></td>"
+
+            "</td><td class='text-center align-middle'><div class='btn-group align-top'><a onclick='View(this)'><button class='btn btn-primary badge'data-toggle='tooltip' type='button'>View</button></a></td>"
 
         var tbody = document.querySelector("#tbl_data tbody");
         var tr = document.createElement("tr");
@@ -109,9 +110,19 @@ function PopulateTable(result) {
             'csv', 'excel', 'pdf'
         ]
     });
+
+    $('#tbl_data td').css('white-space', 'initial');
 }
 
 
+function View(ele) {
+    let Detail = $(ele).closest("tr").find("td:eq(2)").text();
+
+
+
+
+    alert(Detail);
+}
 
 
 
