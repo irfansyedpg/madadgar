@@ -247,7 +247,7 @@ function PopulateTable(result) {
     for (var i = 0; i < result.length; i++) {
 
         var rows = "";
-        console.log(result[i].department);
+        
 
         rows += "<td  style='font-weight: bold'>" + index +
 
@@ -270,6 +270,12 @@ function PopulateTable(result) {
 
     }
 
+    $('#tbl_data').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            'csv', 'excel', 'pdf'
+        ]
+    });
    
         $('#tbl_data td').css('white-space', 'initial');
    

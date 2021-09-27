@@ -334,7 +334,7 @@ namespace PEOCMIS.Controllers
         [HttpPost(Name = "GetEvacuationCenterAction")]
         public JsonResult GetEvacuationCenterAction()
         {
-            var result = _repo.FnGetEvacuationCenter();
+            var result = _repo.FnGetEvacuationCenter("1");
 
             string text = "success";
             if (result == null)

@@ -272,6 +272,16 @@ function PopulateTable(result) {
 
 
     }
+
+
+    $('#tbl_data').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            'csv', 'excel', 'pdf'
+        ]
+    });
+
+    $('#tbl_data td').css('white-space', 'initial');
 }
 
 

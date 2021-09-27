@@ -276,11 +276,12 @@ namespace PEOCMIS.Repository
 
         // EvacuationCenter
         [Obsolete]
-        public List<VMEvacuationCenter> FnGetEvacuationCenter()
+        public List<VMEvacuationCenter> FnGetEvacuationCenter(string Type)
         {
             try
             {
-                return _context.EVaCntinfo.FromSql($"MD_Pro_Get_EvacuationCenter"
+                return _context.EVaCntinfo.FromSql($"MD_Pro_Get_EvacuationCenter @Type",
+                           new SqlParameter("@Type", Type)
 
                 ).AsEnumerable().ToList();
 
@@ -547,10 +548,37 @@ namespace PEOCMIS.Repository
 
                 throw;
             }
+        }
+
+
+
+        [Obsolete]
+        public string FnUpdateEvacuationCenter(int PK, int Status)
+        {
+            try
+            {
+                var contt = _context.Database.ExecuteSqlCommand($"MD_Pro_Update_EvacuationCenter_Status @PK,@Status",
+                   new SqlParameter("@PK", PK),
+                   new SqlParameter("@Status", Status)
+
+
+                );
+
+                if (contt > 0)
+                {
+                    return "Success";
+                }
+                return "error";
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
 
 
         }
-
 
         [Obsolete]
         public string FnTehsilCnt(string tehsil, int distid)

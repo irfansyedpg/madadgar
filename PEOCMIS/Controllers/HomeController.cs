@@ -232,9 +232,9 @@ using Microsoft.AspNetCore.Http;
 
         }
 
-        public JsonResult GetEvacuationCenterAction()
+        public JsonResult GetEvacuationCenterAction(string Type)
         {
-            var result = _repo.FnGetEvacuationCenter();
+            var result = _repo.FnGetEvacuationCenter( Type);
 
             string text = "success";
             if (result == null)
@@ -246,6 +246,18 @@ using Microsoft.AspNetCore.Http;
         public JsonResult DeleteEvacuationCentersAction(int PK)
         {
             var result = _repo.FnEvacuationCentersCnt(PK);
+
+            string text = "success";
+            if (result == null)
+                text = "error";
+            return Json(new { message = text, result = result });
+
+        }
+
+        // UserInfo
+        public JsonResult UpdateEvacuationCenterAction(int PK, int Status)
+        {
+            var result = _repo.FnUpdateEvacuationCenter(PK, Status);
 
             string text = "success";
             if (result == null)

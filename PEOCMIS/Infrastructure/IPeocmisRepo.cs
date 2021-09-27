@@ -28,7 +28,8 @@ namespace PEOCMIS.Infrastructure
         List<VMQuickLinks> FnQuicklinkCnt(MQuickLinks Qlinks);
         List<VMQuickLinks> FnGetQuickCnt();
 
-        List<VMEvacuationCenter> FnGetEvacuationCenter();
+        List<VMEvacuationCenter> FnGetEvacuationCenter(string Type);
+
         List<VMEvacuationCenter> FnEvacuationCenterCnt(MEvacuationCenter Qlinks);
 
 
@@ -38,6 +39,8 @@ namespace PEOCMIS.Infrastructure
 
    
         string FnUpdateUserInfo(int UserID,int Status);
+
+        string FnUpdateEvacuationCenter(int PK, int Status);
 
         List<VMComplaint> FnGetComplaintCenter();
 
