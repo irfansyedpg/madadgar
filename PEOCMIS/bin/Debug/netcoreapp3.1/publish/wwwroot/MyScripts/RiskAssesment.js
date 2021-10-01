@@ -247,7 +247,7 @@ function PopulateTable(result) {
     for (var i = 0; i < result.length; i++) {
 
         var rows = "";
-        console.log(result[i].department);
+        
 
         rows += "<td  style='font-weight: bold'>" + index +
 
@@ -258,7 +258,7 @@ function PopulateTable(result) {
 
 
            + "<td>" + result[i].pk +
-
+            "<td>" + result[i].datee +
             "</td><td class='text-center align-middle'><div class='btn-group align-top'><a onclick='View(this)'><button class='btn btn-primary badge'data-toggle='tooltip' type='button'>Delete</button></a></td>"
 
         var tbody = document.querySelector("#tbl_data tbody");
@@ -270,8 +270,15 @@ function PopulateTable(result) {
 
     }
 
-   
-        $('#tbl_data td').css('white-space', 'initial');
+
+    $('#tbl_data').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            'csv', 'excel', 'pdf'
+        ]
+    });
+
+    $('#tbl_data td').css('white-space', 'initial');
    
 }
 

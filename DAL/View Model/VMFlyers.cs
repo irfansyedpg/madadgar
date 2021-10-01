@@ -18,5 +18,7 @@ namespace DAL.ViewModel
 
         public string Typee { get; set; }
 
+        public string Datee { get; set; }
+
     }
 }

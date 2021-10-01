@@ -206,7 +206,7 @@ function FnLoadData() {
             tbody.appendChild(tr);
 
 
-            if (result[0].section == "Report Disaster") {
+            if (result[0].section == "Report Disaster" || result[0].section == "Damage Need Assesment") {
                 GetRDImages(logId);
 
             }

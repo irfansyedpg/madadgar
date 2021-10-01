@@ -94,6 +94,10 @@ namespace PEOCMIS.Controllers
             }
             var resultResponse = _repo.InsertResponse(logView.responseTables);
 
+
+
+
+
             if (resultResponse > 0)
             {
                 return Ok(new { message = logView.responseTables.Count + " of " + result, lastId = lastId });
@@ -161,6 +165,7 @@ namespace PEOCMIS.Controllers
             {
                 return Ok(new { message = resultResponse + " of " + " Record Inserted" });
             }
+
 
             return BadRequest("error ");
         }
@@ -267,7 +272,12 @@ namespace PEOCMIS.Controllers
                     await ImageModel.ImageFile.CopyToAsync(fileStream);
                 }
 
+
+
+              
+            
                 var result = _repo.FnRDImagesCnt(ImageModel);
+                
 
 
                 //Insert record
@@ -435,9 +445,14 @@ namespace PEOCMIS.Controllers
             string text = "success";
             if (result == null)
                 text = "error";
+
+
             return Json(new { message = text, result = result });
 
         }
+
+
+
 
 
     }

@@ -78,6 +78,7 @@ using Microsoft.AspNetCore.Http;
         [AuthorizedAction]
         public IActionResult ComplaintsAsmnt()
         {
+         
             return View("Complaints", "Master_page");
         }
 
@@ -119,9 +120,15 @@ using Microsoft.AspNetCore.Http;
                 return View();
             }
 
-       
 
-            public JsonResult SigInAction(UserLogin login)
+
+        [AuthorizedAction]
+        public IActionResult ComplaintDetails()
+        {
+            return View("ComplaintDetails", "Master_page");
+        }
+
+        public JsonResult SigInAction(UserLogin login)
             {
                 var result = _repo.FnLogin(login);
             
@@ -535,5 +542,41 @@ using Microsoft.AspNetCore.Http;
 
         }
 
+
+
+        // Push notifincation experitment
+
+        [HttpPost]
+        public ActionResult Complaints()
+        {
+          
+                ViewBag.JavaScriptFunction = string.Format("ShowGreetings();");
+            
+      
+            return View();
+        }
+
+
+        public JsonResult GetComplaintDetailAction(int CompID)
+        {
+            var result = Json(_repo.FnComplantDetailCenter(CompID));
+
+
+            return result;
+
+        }
+
+
+ 
+        public JsonResult InsertActionDetailAction(MComplaintAction QLink)
+        {
+            var result = _repo.FnComplaintActionCnt(QLink);
+
+            string text = "success";
+            if (result == null)
+                text = "error";
+            return Json(new { message = text, result = result });
+
+        }
     }
 }

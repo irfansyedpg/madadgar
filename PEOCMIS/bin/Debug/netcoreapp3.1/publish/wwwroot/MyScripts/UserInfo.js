@@ -81,7 +81,7 @@ function PopulateTable(result) {
         var action = "";
         if (result[i].status == 0) {
 
-            action =    "</td><td class='text-center align-middle'><div class='btn-group align-top'><a onclick='Aprrove(this)'><button class='btn btn-primary badge'data-toggle='tooltip' type='button'>Approve</button></a></td>"
+            action =    "</td><td class='text-center align-middle'><div class='btn-group align-top'><a onclick='Aprrove(this)'><button class='btn btn-primary badge'data-toggle='tooltip' type='button'>Pending</button></a></td>"
         }
         else {
 

@@ -15,6 +15,7 @@ namespace DAL.ViewModel
         public string Title { get; set; }
         public string Detail { get; set; }
         public string ImageName { get; set; }
+        public string Datee { get; set; }
 
     }
 }

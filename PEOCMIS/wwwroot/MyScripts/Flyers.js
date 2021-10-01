@@ -260,7 +260,9 @@ function PopulateTable(result) {
 
 
 
-           + "<td>" + result[i].pk +
+            + "<td>" + result[i].pk +
+
+             "<td>" + result[i].datee +
 
             "</td><td class='text-center align-middle'><div class='btn-group align-top'><a onclick='View(this)'><button class='btn btn-primary badge'data-toggle='tooltip' type='button'>Delete</button></a></td>"
 

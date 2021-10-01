@@ -56,6 +56,8 @@ namespace PEOCMIS.Repository
 
                 if (getdetailprojectlist > 0)
                 {
+                   
+
                     return "Success";
                 }
                 return "error";
@@ -580,6 +582,37 @@ namespace PEOCMIS.Repository
 
         }
 
+
+
+        [Obsolete]
+        public string FnComplaintActionCnt(MComplaintAction action)
+        {
+            try
+            {
+                var contt = _context.Database.ExecuteSqlCommand($"MD_Pro_Insert_Complaints_Action @ComPK, @ActionTaken,@ActionBy",
+                   new SqlParameter("@ComPK", action.ComPK),
+                   new SqlParameter("@ActionTaken", action.ActionTaken),
+                      new SqlParameter("@ActionBy", action.ActionBy)
+
+
+                );
+
+                if (contt > 0)
+                {
+                    return "Success";
+                }
+                return "error";
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+
+        }
+
         [Obsolete]
         public string FnTehsilCnt(string tehsil, int distid)
         {
@@ -806,12 +839,13 @@ namespace PEOCMIS.Repository
 
 
         [Obsolete]
-        public string FnComplaintsCnt(MComplaints riskassment)
+        public int FnComplaintsCnt(MComplaints riskassment)
         {
 
+   
             try
             {
-                var contt = _context.Database.ExecuteSqlCommand($"MD_Pro_Insert_Complaints @Title,@Detail,@UserId,@Dated",
+                var contt = _context.CompID.FromSql($"MD_Pro_Insert_Complaints @Title,@Detail,@UserId,@Dated",
 
                            new SqlParameter("@Title", riskassment.Title),
                            new SqlParameter("@Detail", riskassment.Detail),
@@ -821,13 +855,10 @@ namespace PEOCMIS.Repository
 
 
 
-                );
+                ).AsEnumerable().FirstOrDefault().PK;
 
-                if (contt > 0)
-                {
-                    return "Success";
-                }
-                return "error";
+
+                return contt;
 
             }
             catch (Exception)
@@ -844,20 +875,23 @@ namespace PEOCMIS.Repository
 
             try
             {
-                var contt = _context.Database.ExecuteSqlCommand($"MD_Pro_RD_images @Path,@LogId",
-                           new SqlParameter("@Path", riskassment.Path),
-                           new SqlParameter("@LogId", riskassment.LogId)
-
-
-
-
-                );
-
-                if (contt > 0)
+                if (riskassment.PK == 007) // insert to Complaint else to RD and DNA 
                 {
-                    return "Success";
+                    var contt = _context.Database.ExecuteSqlCommand($"MD_Pro_Complaint_images @Path,@ComPK",
+                             new SqlParameter("@Path", riskassment.Path),
+                             new SqlParameter("@ComPK", riskassment.LogId));
                 }
-                return "error";
+                else
+                {
+                    var contt = _context.Database.ExecuteSqlCommand($"MD_Pro_RD_images @Path,@LogId",
+                               new SqlParameter("@Path", riskassment.Path),
+                               new SqlParameter("@LogId", riskassment.LogId));
+                }
+
+
+
+
+                return "Succes";
 
             }
             catch (Exception)
@@ -1006,6 +1040,39 @@ namespace PEOCMIS.Repository
             }
 
         }
+
+
+        [Obsolete]
+        public List<VMComplaintsDetails> FnComplantDetailCenter(int CompPk)
+        {
+
+
+
+            try
+            {
+
+
+
+                var result = _context.CompDetailfo.FromSql($"MD_Pro_Get_Complaints_Details @ComPK",
+
+                     new SqlParameter("@ComPK", CompPk)
+                    ).AsEnumerable().ToList();
+
+
+                return result;
+
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+
+
+        }
+
 
     }
 

@@ -26,6 +26,10 @@ namespace PEOCMIS.Infrastructure
 
 
         List<VMQuickLinks> FnQuicklinkCnt(MQuickLinks Qlinks);
+
+
+        string FnComplaintActionCnt(MComplaintAction Qlinks);
+
         List<VMQuickLinks> FnGetQuickCnt();
 
         List<VMEvacuationCenter> FnGetEvacuationCenter(string Type);
@@ -45,6 +49,8 @@ namespace PEOCMIS.Infrastructure
         List<VMComplaint> FnGetComplaintCenter();
 
         List<VMLogDetails> FnLogDetailCenter(int logId);
+
+        List<VMComplaintsDetails> FnComplantDetailCenter(int CompID);
 
         List<VMDistricts> FnGetDistricts();
 
@@ -74,7 +80,7 @@ namespace PEOCMIS.Infrastructure
         string FnFlyersCnt(MFlyers riskassment);
 
 
-        string FnComplaintsCnt(MComplaints cmplt);
+        int FnComplaintsCnt(MComplaints cmplt);
 
 
         string FnRDImagesCnt(MRDImage riskassment);

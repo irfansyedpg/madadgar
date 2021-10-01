@@ -1492,3 +1492,4 @@ D:\data transfer\Mobilise one Folder\Mobilise Civil Protection APp\PEOCMIS\PEOCM
 D:\data transfer\Mobilise one Folder\Mobilise Civil Protection APp\PEOCMIS\PEOCMIS\obj\Debug\netcoreapp3.1\Razor\Views\Home\Tehsil.cshtml.g.cs
 D:\data transfer\Mobilise one Folder\Mobilise Civil Protection APp\PEOCMIS\PEOCMIS\obj\Debug\netcoreapp3.1\Razor\Views\Home\Complaints.cshtml.g.cs
 D:\data transfer\Mobilise one Folder\Mobilise Civil Protection APp\PEOCMIS\PEOCMIS\obj\Debug\netcoreapp3.1\Razor\Views\Home\Flyers.cshtml.g.cs
+D:\data transfer\Mobilise one Folder\Mobilise Civil Protection APp\PEOCMIS\PEOCMIS\obj\Debug\netcoreapp3.1\Razor\Views\Home\ComplaintDetails.cshtml.g.cs

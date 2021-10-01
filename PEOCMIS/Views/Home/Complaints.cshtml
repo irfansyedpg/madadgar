@@ -7,15 +7,42 @@
 
     <!-- ============================================================== -->
     <div class="page-wrapper">
- 
+
+
+        <!--
+
+
+    @using (Html.BeginForm("Complaints", "Home", FormMethod.Post))
+    {
+
+        <input type="submit" id="btnSubmit" value="Submit" />
+    }
+
+
+        <script type="text/javascript">
+
+            function ShowGreetings(name) {
+                alert("Messagestart: Hello");
+            };
+
+        </script>
+        @if (ViewBag.JavaScriptFunction != null)
+        {
+            <script type="text/javascript">
+            @Html.Raw(ViewBag.JavaScriptFunction)
+            </script>
+        }
+
+
+            -->
         <div class="row">
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                   
+
                         <div class="form-group row">
                             <label for="inputPassword" class="col-sm-8 col-form-label">     <h4 class="card-title">User Complaints </h4></label>
-                        
+
                         </div>
                         <div class="table-responsive">
                             <table id="tbl_data" class="table table-striped table-bordered display no-wrap"
@@ -24,6 +51,7 @@
                                     <tr>
                                         @*AppPK,b.Response,b.VarName,b.Section*@
                                         <th>#</th>
+                                        <th>Action</th>
                                         <th>Title</th>
                                         <th>Detail</th>
                                         <th>User Name</th>
@@ -35,7 +63,7 @@
                                         <th>Registerd Since</th>
                                         <th>GPS Location</th>
                                         <th>PK</th>
-                                        <th>Action</th>
+
 
                                     </tr>
                                 </thead>

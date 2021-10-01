@@ -188,12 +188,12 @@ function PopulateTable(result) {
         var action = "";
         if (result[i].status == 0) {
 
-            action = "</td><td class='text-center align-middle'><div class='btn-group align-top'><a onclick='Disabled(this)'><button class='btn btn-primary badge'data-toggle='tooltip' type='button'>Disabled</button></a></td>"
+            action = "</td><td class='text-center align-middle'><div class='btn-group align-top'><a onclick='Disabled(this)'><button class='btn btn-primary badge'data-toggle='tooltip' type='button'>Dormant</button></a></td>"
         }
         else {
 
 
-            action = "</td><td class='text-center align-middle'><div class='btn-group align-top'><a onclick='Enabled(this)'><button class='btn btn-success badge'data-toggle='tooltip' type='button'>Enabled</button></a></td>"
+            action = "</td><td class='text-center align-middle'><div class='btn-group align-top'><a onclick='Enabled(this)'><button class='btn btn-success badge'data-toggle='tooltip' type='button'>Active</button></a></td>"
 
         }
 

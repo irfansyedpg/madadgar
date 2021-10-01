@@ -49,6 +49,9 @@ namespace DAL.DBContext
         [Obsolete]
         public DbQuery<VMLogDetails> LogsDetailinfo { get; set; }
 
+        [Obsolete]
+        public DbQuery<VMComplaintsDetails> CompDetailfo { get; set; }
+
 
         [Obsolete]
         public DbQuery<VMTehsil> Teshilinfo { get; set; }
@@ -71,6 +74,9 @@ namespace DAL.DBContext
 
 
         public DbSet<VMFlyers> CntxtFlyers { get; set; }
+
+        [Obsolete]
+        public DbQuery<CompID> CompID { get; set; }
 
         public DbSet<VMRDImage> CntxtRDImages { get; set; }
 
