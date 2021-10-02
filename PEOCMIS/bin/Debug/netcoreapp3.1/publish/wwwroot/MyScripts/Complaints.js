@@ -76,6 +76,8 @@ function PopulateTable(result) {
 
         rows += "<td  style='font-weight: bold'>" + index +
 
+
+            "<td class='text-center align-middle'><div class='btn-group align-top'><a onclick='View(this)'><button class='btn btn-primary badge'data-toggle='tooltip' type='button'>View</button></a>"+
             "<td>" + result[i].title +
             "<td>" + result[i].detail +
 
@@ -88,12 +90,11 @@ function PopulateTable(result) {
             "<td> " + result[i].dateRegistration +
             "<td> " + result[i].latt + ", "+result[i].longg +
          
-            "<td> " + result[i].pk +
+            "<td> " + result[i].pk + "</td >"
 
       
 
 
-            "</td><td class='text-center align-middle'><div class='btn-group align-top'><a onclick='View(this)'><button class='btn btn-primary badge'data-toggle='tooltip' type='button'>View</button></a></td>"
 
         var tbody = document.querySelector("#tbl_data tbody");
         var tr = document.createElement("tr");
@@ -116,13 +117,15 @@ function PopulateTable(result) {
 
 
 function View(ele) {
-    let Detail = $(ele).closest("tr").find("td:eq(2)").text();
+    let logId = $(ele).closest("tr").find("td:eq(12)").text();
+    localStorage.setItem("ComPK", logId);
 
-
-
-
-    alert(Detail);
+  //  alert(logId)
+    window.location.href = "ComplaintDetails";
 }
+
+
+
 
 
 

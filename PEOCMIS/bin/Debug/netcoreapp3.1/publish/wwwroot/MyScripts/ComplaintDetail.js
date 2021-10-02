@@ -3,98 +3,38 @@
    
     FnLoadData();
 
+
+
+    $("#form_submit").submit(function (event) {
+        event.preventDefault();
+
+
+        let actionby = document.forms["form_submit"]["actionby"].value;
+        let detail = document.forms["form_submit"]["detail"].value;
+        if (actionby == "") {
+            //     alert("Please Enter Department Name");
+
+
+            toastr["error"]("Enter Value", 'Please Enter User Name!');
+
+            return false;
+        }
+
+        if (detail == "") {
+            toastr["error"]("Enter Value", 'Please Enter Detail!');
+            return false;
+        }
+
+        InsertData();
+
+        return false;
+    });
+
 });
 
 
 
 
-
-
-function GetRDImages(logidd) {
-
-
-
-    var Pageurl = window.location.href;
-
-
-    var Flag = Pageurl.includes("Home");
-
-
-    if (Flag == false) {
-        url = "Home/GetRDImgagesAction";
-
-
-    }
-
-    if (Flag == true) {
-        url = "GetRDImgagesAction";
-    }
-
-    $.ajax({
-        type: "POST",
-        url: "GetRDImgagesAction",
-
-        data: { logid: logidd},
-
-        dataType: "JSON",
-        success: function (response) {
-
-            if (response.message == 'error') {
-
-                toastr["error"]('Unable to Get Data', 'ERROR');
-
-
-            }
-            else {
-
-
-                var result = response.result;
-
-                PopulateTable(result);
-
-            }
-
-        },
-        error: function (status, error) {
-
-        },
-
-    });
-
-}
-
-
-function PopulateTable(result) {
-
-    $("#tbl_image").DataTable().destroy();
-    $("#tbl_image tbody").empty();
-
-    var index = 1;
-    for (var i = 0; i < result.length; i++) {
-
-        var rows = "";
-        console.log(result[i].department);
-
-        rows += "<td style='font-weight: bold'>" + "Picture "+ index +
-
-          
-            "<td><img id='timg' name='timg'  src='/pdmamadadgar/ReportDisaterImages/" + result[i].path + "'  style='background-size: contain; background-repeat: no-repeat; background-position: center; max-width:550px;  max-height:300px;'/>"
-
-
-        +
-            "</td>"
-
-        var tbody = document.querySelector("#tbl_image tbody");
-        var tr = document.createElement("tr");
-        tr.innerHTML = rows;
-        tbody.appendChild(tr);
-        index++;
-
-
-    }
-
-    $('#tbl_image td').css('white-space', 'initial');
-}
 
 
 
@@ -110,23 +50,26 @@ function FnLoadData() {
     //var Flag1 = Pageurl.includes("OnlineServices");
 
     if (Flag == false) {
-        url = "Home/GetLogsDetailAction";
+        url = "Home/GetComplaintDetailAction";
 
 
     }
 
     if (Flag == true) {
-        url = "GetLogsDetailAction";
+        url = "GetComplaintDetailAction";
     }
 
 
 
-    let logId = localStorage.getItem("logId");
+    let ComPK = localStorage.getItem("ComPK");
+
+ 
+
     $.ajax({
         type: "POST",
-        url: "GetLogsDetailAction",
+        url: "GetComplaintDetailAction",
         datatype: "json",
-        data: { logId: logId,},
+        data: { CompID: ComPK,},
         dataType: "JSON",
         success: function (result) {
 
@@ -150,7 +93,8 @@ function FnLoadData() {
             for (var i = 0; i < result.length; i++) {
 
 
-                
+
+
                 var rows = "";
 
                 rows += "<td>" + index
@@ -162,8 +106,9 @@ function FnLoadData() {
 
 
                     //AppPK, b.Response, b.VarName, b.Section 
-                      result[i].varname +
-                    "<td>" + result[i].response +
+                    result[i].actionBy +
+                    "<td>" + result[i].actionTaken + 
+                    "<td>" + result[i].dated +
                     "</td>"
 
 
@@ -177,27 +122,41 @@ function FnLoadData() {
             }
 
 
+            document.getElementById('cmpdetail').innerHTML = result[0].detail
+
 
             $('#tbl_data td').css('white-space', 'initial');
 
+ 
 
+        
 
             /// for table info
 
-
+     
 
             var rows = "";
 
-            rows += "<td  style='font-weight: bold'>" + result[0].name +
+            rows += 
                 //AppPK, b.Response, b.VarName, b.Section 
+
+
+
+               
+         
              
-             
+                "<td>" + result[0].title +
+           
+                "<td>" + result[0].name +
                 "<td>" + result[0].contactNo +
                 "<td>" + result[0].district +
-                "<td>" + result[0].datee +
-                "<td>" + result[0].section +
-                "<td>" + result[0].disasterType +
-                "<td>" + result[0].lat +", "+ result[0].long +
+
+                "<td>" + result[0].tehsil +
+                "<td>" + result[0].address +
+                "<td>" + result[0].type +
+                "<td>" + result[0].dateRegistration +
+         
+            
                 "</td>"
 
             var tbody = document.querySelector("#tbl_info tbody");
@@ -206,10 +165,10 @@ function FnLoadData() {
             tbody.appendChild(tr);
 
 
-            if (result[0].section == "Report Disaster" || result[0].section == "Damage Need Assesment") {
-                GetRDImages(logId);
+   
+      
 
-            }
+            
 
 
             //
@@ -224,6 +183,43 @@ function FnLoadData() {
                     'csv', 'excel', 'pdf'
                 ]
             });
+
+
+
+
+
+            /// Images Table 
+
+
+            $("#tbl_image").DataTable().destroy();
+            $("#tbl_image tbody").empty();
+
+            var index = 1;
+            for (var i = 0; i < result.length && i<2; i++) {
+
+                var rows = "";
+             
+
+                rows += "<td style='font-weight: bold'>" + "Picture " + index +
+
+
+                    "<td><img id='timg' name='timg'  src='/pdmamadadgar/ReportDisaterImages/" + result[i].pics + "'  style='background-size: contain; background-repeat: no-repeat; background-position: center; max-width:550px;  max-height:300px;'/>"
+
+
+                    +
+                    "</td>"
+
+                var tbody = document.querySelector("#tbl_image tbody");
+                var tr = document.createElement("tr");
+                tr.innerHTML = rows;
+                tbody.appendChild(tr);
+                index++;
+
+
+            }
+
+            $('#tbl_image td').css('white-space', 'initial');
+
 
 
             TableManageButtons = function () {
@@ -267,10 +263,13 @@ function FnLoadData() {
 
 
 function InitMap(locations) {
-   
+
+
+
+
     var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 13,
-        center: new google.maps.LatLng(locations[0].lat, locations[0].long),
+        center: new google.maps.LatLng(locations[0].latt, locations[0].longg),
         mapTypeId: google.maps.MapTypeId.ROADMAP
     });
     //console.log(map);
@@ -311,5 +310,68 @@ function View(ele) {
 }
 
 function summaryFilter(data) {
+
+}
+
+
+function InsertData() {
+
+    var url;
+
+    var Pageurl = window.location.href;
+
+
+    var Flag = Pageurl.includes("Home");
+    //var Flag1 = Pageurl.includes("OnlineServices");
+
+    if (Flag == false) {
+        url = "Home/InsertActionDetailAction";
+
+
+    }
+
+    if (Flag == true) {
+        url = "InsertActionDetailAction";
+    }
+
+
+
+
+    $.ajax({
+        type: "POST",
+        url: "InsertActionDetailAction",
+
+
+
+        data: { ComPK: localStorage.getItem("ComPK"), ActionBy: $("#actionby").val(), ActionTaken: $("#detail").val() },
+
+        dataType: "JSON",
+        success: function (response) {
+
+            if (response.message == 'error') {
+
+                toastr["error"]('Unable to Insert', 'Something went wrong');
+
+
+            }
+            else {
+
+                toastr["success"]("Data Inserted", 'Data Inserted Succefully!');
+
+                $("#deptName").val("");
+                $("#link").val("");
+              
+
+                FnLoadData();
+
+            }
+
+        },
+        error: function (status, error) {
+
+        },
+
+    });
+
 
 }

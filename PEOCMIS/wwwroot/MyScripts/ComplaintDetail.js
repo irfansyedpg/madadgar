@@ -112,10 +112,12 @@ function FnLoadData() {
                     "</td>"
 
 
+                if (result[i].actionBy !== null) {
                 var tbody = document.querySelector("#tbl_data tbody");
                 var tr = document.createElement("tr");
                 tr.innerHTML = rows;
-                tbody.appendChild(tr);
+                    tbody.appendChild(tr);
+                }
                 index++;
 
 
@@ -195,10 +197,10 @@ function FnLoadData() {
             $("#tbl_image tbody").empty();
 
             var index = 1;
-            for (var i = 0; i < result.length && i<2; i++) {
+            for (var i = 0; i < result.length && i < 2; i++) {
 
                 var rows = "";
-             
+
 
                 rows += "<td style='font-weight: bold'>" + "Picture " + index +
 
@@ -209,10 +211,13 @@ function FnLoadData() {
                     +
                     "</td>"
 
+                if (result[i].pics != null) { 
+
                 var tbody = document.querySelector("#tbl_image tbody");
                 var tr = document.createElement("tr");
                 tr.innerHTML = rows;
                 tbody.appendChild(tr);
+                }
                 index++;
 
 
