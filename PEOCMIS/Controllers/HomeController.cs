@@ -91,8 +91,28 @@ using Microsoft.AspNetCore.Http;
         [AuthorizedAction]
         public IActionResult Districtcnt()
         {
+            // ViewBag.JavaScriptFunction = string.Format("ShowGreetings('{0}');", "Irfan");
+
+
+          //  Distritt();
+
             return View("District", "Master_page");
         }
+
+
+
+
+        [HttpPost]
+        public ActionResult Distritt()
+        {
+             ViewBag.JavaScriptFunction = string.Format("ShowGreetings('{0}');", "Irfan");
+            
+          
+            return View("District", "Master_page");
+        }
+
+
+
 
 
         [AuthorizedAction]
@@ -183,6 +203,8 @@ using Microsoft.AspNetCore.Http;
             string text = "success";
             if (result == null)
                 text = "error";
+
+
             return Json(new { message = text, result = result });
 
         }
@@ -322,6 +344,8 @@ using Microsoft.AspNetCore.Http;
             if (result == null)
                 text = "error";
             return Json(new { message = text, result = result });
+
+        
 
         }
 
@@ -481,6 +505,18 @@ using Microsoft.AspNetCore.Http;
 
         }
 
+
+        public JsonResult GetResponseAction(int logid)
+        {
+            var result = _repo.FnGetRDActions(logid);
+
+            string text = "success";
+            if (result == null)
+                text = "error";
+            return Json(new { message = text, result = result });
+
+        }
+
         public JsonResult ReiskassesmentAction(int PK)
         {
             var result = _repo.FnDeleteRiskAssmentCnt(PK);
@@ -571,6 +607,20 @@ using Microsoft.AspNetCore.Http;
         public JsonResult InsertActionDetailAction(MComplaintAction QLink)
         {
             var result = _repo.FnComplaintActionCnt(QLink);
+
+            string text = "success";
+            if (result == null)
+                text = "error";
+            return Json(new { message = text, result = result });
+
+        }
+
+
+
+
+        public JsonResult InsertResponseAction(MComplaintAction QLink)
+        {
+            var result = _repo.FnResponseActionCnt(QLink);
 
             string text = "success";
             if (result == null)

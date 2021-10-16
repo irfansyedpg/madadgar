@@ -3,6 +3,33 @@
    
     FnLoadData();
 
+    GetResponseAction(localStorage.getItem("logId"));
+
+    $("#form_submit").submit(function (event) {
+        event.preventDefault();
+
+
+        let actionby = document.forms["form_submit"]["actionby"].value;
+        let detail = document.forms["form_submit"]["detail"].value;
+        if (actionby == "") {
+            //     alert("Please Enter Department Name");
+
+
+            toastr["error"]("Enter Value", 'Please Enter User Name!');
+
+            return false;
+        }
+
+        if (detail == "") {
+            toastr["error"]("Enter Value", 'Please Enter Detail!');
+            return false;
+        }
+
+        InsertData();
+
+        return false;
+    });
+
 });
 
 
@@ -64,6 +91,60 @@ function GetRDImages(logidd) {
 }
 
 
+function GetResponseAction(logidd) {
+
+
+
+    var Pageurl = window.location.href;
+
+
+    var Flag = Pageurl.includes("Home");
+
+
+    if (Flag == false) {
+        url = "Home/GetResponseAction";
+
+
+    }
+
+    if (Flag == true) {
+        url = "GetResponseAction";
+    }
+
+    $.ajax({
+        type: "POST",
+        url: "GetResponseAction",
+
+        data: { logid: logidd },
+
+        dataType: "JSON",
+        success: function (response) {
+
+            if (response.message == 'error') {
+
+                toastr["error"]('Unable to Get Data', 'ERROR');
+
+
+            }
+            else {
+
+
+                var result = response.result;
+
+                PopulateRDAction(result);
+
+            }
+
+        },
+        error: function (status, error) {
+
+        },
+
+    });
+
+}
+
+
 function PopulateTable(result) {
 
     $("#tbl_image").DataTable().destroy();
@@ -98,6 +179,120 @@ function PopulateTable(result) {
 
 
 
+
+
+function PopulateRDAction(result) {
+
+    $("#tbl_action").DataTable().destroy();
+    $("#tbl_action tbody").empty();
+
+    var index = 1;
+    var index = 1;
+
+    for (var i = 0; i < result.length; i++) {
+
+
+
+
+        var rows = "";
+
+        rows += "<td>" + index
+
+
+            + "<td  style='font-weight: bold'>" +
+
+
+
+
+            //AppPK, b.Response, b.VarName, b.Section 
+            result[i].actionBy +
+            "<td>" + result[i].actionTaken +
+            "<td>" + result[i].dated +
+            "</td>"
+
+
+        if (result[i].actionBy !== null) {
+            var tbody = document.querySelector("#tbl_action tbody");
+            var tr = document.createElement("tr");
+            tr.innerHTML = rows;
+            tbody.appendChild(tr);
+        }
+        index++;
+
+
+    }
+
+    $('#tbl_action td').css('white-space', 'initial');
+}
+
+
+
+
+
+
+
+function InsertData() {
+
+    var url;
+
+    var Pageurl = window.location.href;
+
+
+    var Flag = Pageurl.includes("Home");
+    //var Flag1 = Pageurl.includes("OnlineServices");
+
+    if (Flag == false) {
+        url = "Home/InsertResponseAction";
+
+
+    }
+
+    if (Flag == true) {
+        url = "InsertResponseAction";
+    }
+
+
+
+
+    $.ajax({
+        type: "POST",
+        url: "InsertResponseAction",
+
+
+
+
+        data: { ComPK: localStorage.getItem("logId"), ActionBy: $("#actionby").val(), ActionTaken: $("#detail").val() },
+
+        dataType: "JSON",
+        success: function (response) {
+
+            if (response.message == 'error') {
+
+                toastr["error"]('Unable to Insert', 'Something went wrong');
+
+
+            }
+            else {
+
+                toastr["success"]("Data Inserted", 'Data Inserted Succefully!');
+
+                $("#actionby").val("");
+                $("#detail").val("");
+
+
+                GetResponseAction(localStorage.getItem("logId"));
+
+            }
+
+        },
+        error: function (status, error) {
+
+        },
+
+    });
+
+
+}
 
 
 
@@ -211,6 +406,8 @@ function FnLoadData() {
 
             }
 
+
+            GetResponseAction(logId);
 
             //
 

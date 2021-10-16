@@ -613,6 +613,38 @@ namespace PEOCMIS.Repository
 
         }
 
+
+
+        [Obsolete]
+        public string FnResponseActionCnt(MComplaintAction action)
+        {
+            try
+            {
+                var contt = _context.Database.ExecuteSqlCommand($"MD_Pro_Insert_Response_Action @LogPK, @ActionTaken,@ActionBy",
+                   new SqlParameter("@LogPK", action.ComPK),
+                   new SqlParameter("@ActionTaken", action.ActionTaken),
+                      new SqlParameter("@ActionBy", action.ActionBy)
+
+
+                );
+
+                if (contt > 0)
+                {
+                    return "Success";
+                }
+                return "error";
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+
+        }
+
+
         [Obsolete]
         public string FnTehsilCnt(string tehsil, int distid)
         {
@@ -987,6 +1019,39 @@ namespace PEOCMIS.Repository
 
 
         }
+
+
+
+        [Obsolete]
+        public List<VMRDAction> FnGetRDActions(int logid)
+        {
+
+
+
+            try
+            {
+
+
+                return _context.CntxtRDAction.FromSql($"MD_Pro_Get_Response_Action @LogId",
+                           new SqlParameter("@LogId", logid)
+
+
+                ).AsEnumerable().ToList();
+
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+
+
+        }
+
+
+
 
         [Obsolete]
         public string FnDeleteRiskAssmentCnt(int pk)

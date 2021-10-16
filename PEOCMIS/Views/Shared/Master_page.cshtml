@@ -70,7 +70,7 @@
                                 <!-- dark Logo text -->
                                 <img src="~/assets/images/logo-text.png" alt="homepage" class="dark-logo" />
                                 <!-- Light Logo text -->
-                                <img src="~/assets/images/logo-light-text.png" class="light-logo" alt="homepage" />
+
                             </span>
                         </a>
                     </div>
@@ -283,6 +283,7 @@
         <div>
             @RenderBody()
         </div>
+        <div id="sound"></div>
         <footer class="footer text-center text-muted">
             All Rights Reserved by Mobilise. Designed and Developed by <a href="#">Mobilise Pakistan team</a>.
         </footer>
@@ -302,7 +303,7 @@
         <script src="~/assets/extra-libs/c3/d3.min.js"></script>
         <script src="~/assets/extra-libs/c3/c3.min.js"></script>
         <script src="~/assets/libs/chartist/dist/chartist.min.js"></script>
-        <script src="~/assets/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
+
         <script src="~/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.min.js"></script>
         <script src="~/assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js"></script>
         <script src="~/dist/js/pages/dashboards/dashboard1.min.js"></script>
@@ -317,7 +318,7 @@
             -->
 
 
-      
+
 
         <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.11.1/js/jquery.dataTables.min.js"></script>
         <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/2.0.0/js/dataTables.buttons.min.js"></script>
@@ -328,6 +329,15 @@
         <link href="https://cdn.datatables.net/1.11.1/css/jquery.dataTables.min.css" rel="stylesheet">
         <link href="https://cdn.datatables.net/buttons/2.0.0/css/buttons.dataTables.min.css" rel="stylesheet">
 
+
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-app.js"></script>
+
+
+        <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-messaging.js"></script>
+
+
+        <script src="~/MyScripts/firebasesettings.js"></script>
 
 
 

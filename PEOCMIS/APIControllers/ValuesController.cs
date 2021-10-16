@@ -18,6 +18,7 @@ namespace PEOCMIS.Controllers
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
+
         private readonly IPeocmisRepo _repo;
         private readonly IWebHostEnvironment _appEnvironment;
         [Obsolete]
@@ -360,6 +361,9 @@ namespace PEOCMIS.Controllers
         {
             var result = _repo.FnGetDistricts();
 
+
+
+
             string text = "success";
             if (result == null)
                 text = "error";
@@ -445,6 +449,8 @@ namespace PEOCMIS.Controllers
             string text = "success";
             if (result == null)
                 text = "error";
+
+            
 
 
             return Json(new { message = text, result = result });

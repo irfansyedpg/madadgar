@@ -129,6 +129,7 @@ function FnLoadData(district, disastertype, section) {
                 rows += "<td  style='font-weight: bold'>" + index +
 
                     "<td>" + result[i].logPK +
+                    "<td class='text-center align-middle'><div class='btn-group align-top'><a onclick='View(this)'><button class='btn btn-primary badge'data-toggle='tooltip' type='button'>View</button></a>" +
                     "<td>" + result[i].name +
                     "<td>" + result[i].contactNo +
                     "<td>" + result[i].district +
@@ -140,7 +141,7 @@ function FnLoadData(district, disastertype, section) {
                     "<td>" + result[i].lat +
                     "<td>" + result[i].long +
                   
-                    "</td><td class='text-center align-middle'><div class='btn-group align-top'><a onclick='View(this)'><button class='btn btn-primary badge'data-toggle='tooltip' type='button'>View</button></a></td>"
+                  "</td>"
 
 
                 var tbody = document.querySelector("#tbl_data tbody");
@@ -177,7 +178,7 @@ function FnLoadData(district, disastertype, section) {
 
 function InitMap(locations) {
 
-    console.log(locations)
+
 
 
     var map = new google.maps.Map(document.getElementById('map'), {
@@ -188,7 +189,7 @@ function InitMap(locations) {
     var infowindow = new google.maps.InfoWindow();
     var marker, i;
     for (i = 0; i < locations.length; i++) {
-        console.log( locations[i].contactNo )
+  
         marker = new google.maps.Marker({
 
             
@@ -286,5 +287,26 @@ function GetDistrict() {
         },
 
     });
+
+
+    // firbase triger  
+
+
+    let enableForegroundNotification = true;
+    messaging.onMessage(function (payload) {
+        console.log('Message received. ', payload);
+        alert(JSON.stringify(payload));
+        FnLoadData("0", "0", "0");
+
+        if (enableForegroundNotification) {
+            let notification = payload.notification;
+            navigator.serviceWorker
+                .getRegistrations()
+                .then((registration) => {
+                    registration[0].showNotification(notification.title);
+                });
+        }
+    });
+
 
 }

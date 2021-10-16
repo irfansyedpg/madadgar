@@ -363,8 +363,8 @@ function InsertData() {
 
                 toastr["success"]("Data Inserted", 'Data Inserted Succefully!');
 
-                $("#deptName").val("");
-                $("#link").val("");
+                $("#actionby").val("");
+                $("#detail").val("");
               
 
                 FnLoadData();

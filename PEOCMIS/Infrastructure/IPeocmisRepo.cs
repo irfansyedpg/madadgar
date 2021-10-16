@@ -30,6 +30,9 @@ namespace PEOCMIS.Infrastructure
 
         string FnComplaintActionCnt(MComplaintAction Qlinks);
 
+
+        string FnResponseActionCnt(MComplaintAction Qlinks);
+
         List<VMQuickLinks> FnGetQuickCnt();
 
         List<VMEvacuationCenter> FnGetEvacuationCenter(string Type);
@@ -91,6 +94,7 @@ namespace PEOCMIS.Infrastructure
         List<VMFlyers> FnGetFlyersCnt();
 
         List<VMRDImage> FnGetRDImagesCnt(int logid);
+        List<VMRDAction> FnGetRDActions(int logid);
 
 
         string FnDeleteRiskAssmentCnt(int pk);

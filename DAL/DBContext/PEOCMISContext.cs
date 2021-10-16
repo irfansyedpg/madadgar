@@ -80,6 +80,8 @@ namespace DAL.DBContext
 
         public DbSet<VMRDImage> CntxtRDImages { get; set; }
 
+        public DbSet<VMRDAction> CntxtRDAction { get; set; }
+
 
 
 
