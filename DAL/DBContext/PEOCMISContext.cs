@@ -22,6 +22,10 @@ namespace DAL.DBContext
         public DbQuery<LogID> LogId { get; set; }
         [Obsolete]
         public DbQuery<UserView> UsersInfo { get; set; }
+
+        [Obsolete]
+        public DbQuery<VMSigin> UsersSign { get; set; }
+
         [Obsolete]
         public DbQuery<VMEmergencyContact> ErCntinfo { get; set; }
 
@@ -39,7 +43,10 @@ namespace DAL.DBContext
         [Obsolete]
         public DbQuery<VMUserInfo> UserInfoinfo { get; set; }
 
-   
+        [Obsolete]
+        public DbQuery<VMUserInfoUserEng> UserInfoUserEnginfo { get; set; }
+
+
 
 
 

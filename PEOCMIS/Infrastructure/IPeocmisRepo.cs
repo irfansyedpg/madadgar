@@ -12,7 +12,7 @@ namespace PEOCMIS.Infrastructure
         string LogsInsertion(Logs logs);
         int Logs();
         int Signup();
-        UserView Login(Login login);
+        VMSigin Login(Login login);
         List<Logs> LogsView(string district, string disastertype, string section);
  
         List<DWRView> DWRViews();
@@ -44,7 +44,8 @@ namespace PEOCMIS.Infrastructure
     
         List<VMUserInfo> FnGetUserInfoCenter(string type);
 
-   
+        List<VMUserInfoUserEng> FnGetUserInfoUserEng(string district);
+
         string FnUpdateUserInfo(int UserID,int Status);
 
         string FnUpdateEvacuationCenter(int PK, int Status);
@@ -84,6 +85,8 @@ namespace PEOCMIS.Infrastructure
 
 
         int FnComplaintsCnt(MComplaints cmplt);
+
+        string FnUpdateVolntStatus(MVolntUserStatus vuser);
 
 
         string FnRDImagesCnt(MRDImage riskassment);

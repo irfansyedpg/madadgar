@@ -306,7 +306,7 @@ namespace PEOCMIS.Controllers
 
             }
 
-            return Json(new { message=text,id=result.Id});
+            return Json(new { message=text,id=result.Id,district=result.District});
 
         }
 
@@ -456,6 +456,26 @@ namespace PEOCMIS.Controllers
             return Json(new { message = text, result = result });
 
         }
+
+
+        [Route("UpdateVolntStatus")]
+        [HttpPost(Name = "UpdateVolntStatus")]
+        public IActionResult UpdateVolntStatus([FromBody] MVolntUserStatus Vuser)
+        {
+            var result = _repo.FnUpdateVolntStatus(Vuser);
+
+            string text = "success";
+            if (result == null)
+                text = "error";
+
+
+
+
+            return Json(new { message = text, result = result });
+
+        }
+
+
 
 
 

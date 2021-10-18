@@ -1,7 +1,7 @@
 ﻿using System;
 namespace DAL.ViewModel
 {
-    public class VMUserInfo
+    public class VMUserInfoUserEng
     {
         public string Name { get; set; }
         public string ContactNo { get; set; }
@@ -15,6 +15,6 @@ namespace DAL.ViewModel
         public string Latt { get; set; }
         public string Longg { get; set; }
         public int Status { get; set; }
- 
+        public string StatusCheckedDate { get; set; }
     }
 }

@@ -1,0 +1,119 @@
+﻿@{
+    Layout = "~/Views/Shared/Master_page.cshtml";
+}
+
+<body>
+
+
+    <!-- ============================================================== -->
+    <div class="page-wrapper">
+
+
+
+        <div class="container-fluid">
+
+
+            <div class="form-group row">
+                <h4>Volunteer Activation</h4>
+
+
+
+            </div>
+
+            <div class="form-group row">
+        
+
+                <h6 style="color:red">This will send emergency alert activation to relevant district Volunteer group</h6>
+
+            </div>
+
+            <form class="mt-4" id="form_submit">
+                <div class="form-group row">
+                    <label for="inputPassword" class="col-sm-2 col-form-label">District</label>
+                    <div class="col-sm-8">
+                        <div class="dropdown dept">
+
+
+                            <select class="form-control dropdown-toggle animated fadeIn drop_but" data-toggle="dropdown" style="transition:0.5s;width: 100%;" id="Districts" name="Districts">
+                                <option selected="" disabled="">District</option>
+
+
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group row">
+                    <label for="inputPassword" class="col-sm-2 col-form-label">Message</label>
+                    <div class="col-sm-8">
+                        <textarea rows="2" class="form-control" id="message" name="message" placeholder="Enter Message"> </textarea>
+                    </div>
+                </div>
+
+
+
+
+
+                <div class="form-group row">
+
+                    <label for="inputPassword" class="col-sm-2 col-form-label"></label>
+                    <div class="col-md-8">
+
+                        <button class="btn btn-success col align-self-end" type="submit">Sent</button>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+
+
+
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+
+                     
+                        <div class="table-responsive">
+                            <table id="tbl_data" class="table table-striped table-bordered display no-wrap"
+                                   style="width:100%">
+                                <thead>
+                                    <tr>
+                                        @*AppPK,b.Response,b.VarName,b.Section*@
+                                        <th>#</th>
+                                        <th>Name</th>
+                                        <th>ContactNo</th>
+                                        <th>Email</th>
+                                        <th>District</th>
+                                        <th>Tehsil</th>
+                                        <th>Address</th>
+                                        <th>Type</th>
+                                        <th>DateRegistration</th>
+                                        <th>GPS</th>
+                                        <th>PK</th>
+                                        <th>Status</th>
+                                        <th>Status Checked Date</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+
+
+
+<script src="~/MyScripts/VolunteerEngagement .js"></script>

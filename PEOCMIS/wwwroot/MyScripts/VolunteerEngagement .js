@@ -3,18 +3,61 @@
 $(document).ready(function () {
 
 
-    GetData(0);
+   // GetData(2);
+    GetDistrict();
+    $("#Districts").change(function () {
+        var sel = document.getElementById("Districts");
+        var text = sel.options[sel.selectedIndex].text;
 
-    $("#UserType").change(function () {
-        var vall = this.value;
 
+       
 
-        GetData(vall);
+        GetData(text);
     });
+
+
+
+
+
+    $("#form_submit").submit(function (event) {
+        event.preventDefault();
+
+
+
+
+        let message = document.getElementById("message").value;
+
+        let dist = document.forms["form_submit"]["Districts"].value;
+
+
+
+        if (dist == "District") {
+            toastr["error"]("Enter Value", 'Please Select District');
+            return false;
+        }
+
+    
+
+        if (message.length < 2) {
+            toastr["error"]("Enter Value", 'Please Enter message Detail!');
+
+            return false;
+        }
+
+
+        var sel = document.getElementById("Districts");
+
+        var distt = sel.options[sel.selectedIndex].text;
+
+        PushNotificaitonAndorid(distt, message);
+
+        return false;
+    });
+
 
 });
 
-function GetData(typee) {
+function GetData(district) {
 
 
   
@@ -25,20 +68,20 @@ function GetData(typee) {
   
 
     if (Flag == false) {
-        url = "Home/GetUserInfoAction";
+        url = "Home/GetUserInfoUserEngAction";
 
 
     }
 
     if (Flag == true) {
-        url = "GetUserInfoAction";
+        url = "GetUserInfoUserEngAction";
     }
 
     $.ajax({
         type: "POST",
-        url: "GetUserInfoAction",
+        url: "GetUserInfoUserEngAction",
 
-        data: { type: typee  },
+        data: { district: district },
 
         dataType: "JSON",
         success: function (response) {
@@ -81,18 +124,23 @@ function PopulateTable(result) {
         var action = "";
         if (result[i].status == 0) {
 
-            action =    "</td><td class='text-center align-middle'><div class='btn-group align-top'><a onclick='Aprrove(this)'><button class='btn btn-primary badge'data-toggle='tooltip' type='button'>Pending</button></a></td>"
+            action = "";
+
+        }
+
+        if (result[i].status == 1) {
+
+            action = "Active";
+
         }
         else {
 
 
-            action = "</td><td class='text-center align-middle'><div class='btn-group align-top'><a onclick='Disaprove(this)'><button class='btn btn-success badge'data-toggle='tooltip' type='button'>Approved</button></a></td>"
+            action = "NotActive";
+          
 
         }
-
-        if (result[i].type != "PDMA Staff") {
-            action = "</td><td class='text-center align-middle'><div class='btn-group align-top'><a ><button class='btn btn-light badge'data-toggle='tooltip' type='button'>Not Applicable</button></a></td>"
-        }
+       
 
         rows += "<td  style='font-weight: bold'>" + index +
 
@@ -105,10 +153,12 @@ function PopulateTable(result) {
             "<td> " + result[i].address +
             "<td> " + result[i].type +
             "<td> " + result[i].dateRegistration +
-            "<td> " + result[i].latt + ", " + result[i].longg+
+            "<td> " + result[i].latt + ", " + result[i].longg +
             "<td> " + result[i].pk +
 
-            action
+            "<td> " + action +
+
+            "<td> " + result[i].statusCheckedDate + "</td>";
 
          //   "< td class='text-center align-middle' > <div class='btn-group align-top'><a onclick='View(this)'><button class='btn btn-primary badge' data-toggle='tooltip' type='button'>Delete</button></a></td>"
 
@@ -220,7 +270,119 @@ function UpdateUserInfo(pk,status) {
 }
 
 
+function GetDistrict() {
 
+
+
+    var Pageurl = window.location.href;
+
+
+    var Flag = Pageurl.includes("Home");
+
+
+    if (Flag == false) {
+        url = "Home/GetDistrictsAction";
+
+
+    }
+
+    if (Flag == true) {
+        url = "GetDistrictsAction";
+    }
+
+    $.ajax({
+        type: "POST",
+        url: "GetDistrictsAction",
+
+        data: {},
+
+        dataType: "JSON",
+        success: function (response) {
+
+            if (response.message == 'error') {
+
+
+
+                alert('error');
+            }
+            else {
+
+
+                var result = response.result;
+
+
+                for (var i = 0; i < result.length; i++) {
+
+
+
+
+                    $('#Districts')
+                        .append($('<option>', { value: result[i].pk })
+                            .text(result[i].district));
+                }
+            }
+
+        },
+        error: function (status, error) {
+
+        },
+
+    });
+
+
+    // firbase triger  
+
+
+
+
+
+}
+
+
+
+
+function PushNotificaitonAndorid(district, message) {
+
+    alert(district)
+    var message = {
+        to: '/topics/' + district,
+        collapse_key: 'type_a',
+        notification: {
+            title: 'IMPORTANT PDMA Madadgar Volunteer Activation',
+            body: message
+        }
+    }
+
+
+
+    $.ajax({
+        type: "POST",
+        url: "https://fcm.googleapis.com/fcm/send",
+        contentType: 'application/json',
+        processData: false,
+        dataType: "JSON",
+
+        headers: {
+            Authorization: 'key=AAAArrrGFZc:APA91bEAL5wkVuqZ8EDeLkTbm7M5TycRgfE8zSwuncmCxpzEL-E4FGb1x2N6OYtdFwSak7lcLojbXhHGnRWW6muZaQ0KVp4CJIRVCyOHpdVrhgHPsu9qkwK6F4RKlrQYCAqnva62z5Dr'
+
+        },
+
+        data: JSON.stringify(message),
+
+        success: function (response) {
+
+
+            toastr["success"]("Sent", 'Message broadcasted Successfully!');
+
+            $("#message").val("");
+        
+
+
+        }
+
+    });
+
+}
 
 
 

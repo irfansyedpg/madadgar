@@ -75,6 +75,12 @@ using Microsoft.AspNetCore.Http;
             return View("UserInfo", "Master_page");
         }
 
+
+        [AuthorizedAction]
+        public IActionResult VolunteerEngagementAsmnt()
+        {
+            return View("VolunteerEngagement", "Master_page");
+        }
         [AuthorizedAction]
         public IActionResult ComplaintsAsmnt()
         {
@@ -320,6 +326,22 @@ using Microsoft.AspNetCore.Http;
             return Json(new { message = text, result = result });
 
         }
+
+
+
+        // UserInfo
+        public JsonResult GetUserInfoUserEngAction(string district)
+        {
+            var result = _repo.FnGetUserInfoUserEng(district);
+
+            string text = "success";
+            if (result == null)
+                text = "error";
+            return Json(new { message = text, result = result });
+
+        }
+
+
 
         // Get Complaint
         public JsonResult GetComplaintAction(string type)

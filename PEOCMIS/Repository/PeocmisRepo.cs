@@ -79,10 +79,10 @@ namespace PEOCMIS.Repository
             return _context.LastIds.FromSql($"MD_Proc_CountID_Signup_ID").AsEnumerable().FirstOrDefault().LogPK;
         }
         [Obsolete]
-        public UserView Login(Login login)
+        public VMSigin Login(Login login)
         {
 
-            return _context.UsersInfo.FromSql($"MD_Pro_User_Login @Email, @Password", new SqlParameter("@Email", login.Email), new SqlParameter("@Password", login.Password)).AsEnumerable()
+            return _context.UsersSign.FromSql($"MD_Pro_User_Login @Email, @Password", new SqlParameter("@Email", login.Email), new SqlParameter("@Password", login.Password)).AsEnumerable()
                     .FirstOrDefault();
 
         }
@@ -364,6 +364,35 @@ namespace PEOCMIS.Repository
 
                 return _context.UserInfoinfo.FromSql($"MD_Pro_Get_UserInfo  @Type",
                    new SqlParameter("@Type", type)
+
+
+                ).AsEnumerable().ToList();
+
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+
+
+        }
+
+
+        [Obsolete]
+        public List<VMUserInfoUserEng> FnGetUserInfoUserEng(string district)
+        {
+
+
+
+            try
+            {
+
+
+                return _context.UserInfoUserEnginfo.FromSql($"MD_Pro_Get_UserInfo_UserEng  @District",
+                   new SqlParameter("@District", district)
 
 
                 ).AsEnumerable().ToList();
@@ -899,6 +928,40 @@ namespace PEOCMIS.Repository
                 throw;
             }
         }
+
+
+
+
+
+
+        [Obsolete]
+        public String FnUpdateVolntStatus(MVolntUserStatus vuser)
+        {
+
+            try
+            {
+                var contt = _context.Database.ExecuteSqlCommand($"MD_Pro_UserStatusVolntEng @UserID,@Status",
+                   new SqlParameter("@UserID", vuser.UserId),
+                   new SqlParameter("@Status", vuser.Status)
+
+
+                );
+
+                if (contt > 0)
+                {
+                    return "Success";
+                }
+                return "error";
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
 
 
         [Obsolete]
