@@ -12,12 +12,14 @@ $(document).ready(function () {
 
 
 
+ 
+
         let name = document.forms["form_submit"]["name"].value;
 
   
    
 
-        console.log(document.getElementById("img").src)
+ 
 
 
 
@@ -46,7 +48,12 @@ $(document).ready(function () {
             return false;
         }
 
-       
+
+
+
+        if (Typee == "2") {
+            PushNotificaitonAndorid(name);
+        }
     
 
 
@@ -98,7 +105,7 @@ function InsertData() {
     
 
 
-    console.log(formData);
+
 
 
     $.ajax({
@@ -118,7 +125,7 @@ function InsertData() {
         contentType: false,
         type: "POST",
         success: function (response) {
-            console.log(response);
+        
             if (response.message == "error") {
                 toastr["error"]( response.message);
             }
@@ -248,7 +255,7 @@ function PopulateTable(result) {
     for (var i = 0; i < result.length; i++) {
 
         var rows = "";
-        console.log(result[i].department);
+     
 
         rows += "<td  style='font-weight: bold'>" + index +
 
@@ -362,3 +369,43 @@ function DeleteData(pk) {
 
 }
 
+
+
+
+
+function PushNotificaitonAndorid(Newtitle) {
+
+ var message = {      
+        to: '/topics/news',
+        collapse_key: 'type_a',
+        notification: {
+            title: 'Updated News',
+            body: Newtitle
+        }
+    }
+
+
+
+    $.ajax({
+        type: "POST",
+        url: "https://fcm.googleapis.com/fcm/send",
+        contentType: 'application/json',
+        processData: false,
+        dataType: "JSON",
+
+        headers: {
+            Authorization: 'key=AAAArrrGFZc:APA91bEAL5wkVuqZ8EDeLkTbm7M5TycRgfE8zSwuncmCxpzEL-E4FGb1x2N6OYtdFwSak7lcLojbXhHGnRWW6muZaQ0KVp4CJIRVCyOHpdVrhgHPsu9qkwK6F4RKlrQYCAqnva62z5Dr'
+         
+        },
+
+        data: JSON.stringify(message),
+
+        success: function (response) {
+
+     
+
+        }
+
+    });
+
+}
