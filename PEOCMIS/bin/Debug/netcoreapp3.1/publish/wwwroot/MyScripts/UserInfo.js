@@ -89,7 +89,10 @@ function PopulateTable(result) {
             action = "</td><td class='text-center align-middle'><div class='btn-group align-top'><a onclick='Disaprove(this)'><button class='btn btn-success badge'data-toggle='tooltip' type='button'>Approved</button></a></td>"
 
         }
-       
+
+        if (result[i].type != "PDMA Staff") {
+            action = "</td><td class='text-center align-middle'><div class='btn-group align-top'><a ><button class='btn btn-light badge'data-toggle='tooltip' type='button'>Not Applicable</button></a></td>"
+        }
 
         rows += "<td  style='font-weight: bold'>" + index +
 

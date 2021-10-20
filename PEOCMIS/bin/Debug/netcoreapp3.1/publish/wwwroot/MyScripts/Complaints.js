@@ -9,7 +9,15 @@ $(document).ready(function () {
 
 });
 
+
+function FnLoadData(a, b, c)
+{
+
+    // just for firebase call
+}
+
 function GetData() {
+
 
 
   

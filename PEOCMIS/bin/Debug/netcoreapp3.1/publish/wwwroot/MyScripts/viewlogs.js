@@ -5,6 +5,8 @@
 
 
 
+
+
     FnLoadData("0", "0", "0");
     GetDistrict();
 
@@ -38,15 +40,29 @@
         
 
         onccclick();
+      
      
     });
 
-
+    
 
  
 });
 
 
+function play1() {
+
+
+    /* Audio link for notification */
+    var mp3 = '<source src="/Media/bellsound.mp3" type="audio/mpeg">';
+    document.getElementById("sound").innerHTML =
+        '<audio autoplay="autoplay">' + mp3 + "</audio>";
+}
+
+function GetData()
+{
+    // just for firebase call
+}
 function onccclick() {
 
 
@@ -292,21 +308,7 @@ function GetDistrict() {
     // firbase triger  
 
 
-    let enableForegroundNotification = true;
-    messaging.onMessage(function (payload) {
-        console.log('Message received. ', payload);
-        alert(JSON.stringify(payload));
-        FnLoadData("0", "0", "0");
-
-        if (enableForegroundNotification) {
-            let notification = payload.notification;
-            navigator.serviceWorker
-                .getRegistrations()
-                .then((registration) => {
-                    registration[0].showNotification(notification.title);
-                });
-        }
-    });
+ 
 
 
 }

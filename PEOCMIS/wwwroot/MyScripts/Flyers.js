@@ -379,7 +379,7 @@ function PushNotificaitonAndorid(Newtitle) {
         to: '/topics/news',
         collapse_key: 'type_a',
         notification: {
-            title: 'PDMA Madadgar Updated News',
+            title: 'PDMA Latest News',
             body: Newtitle
         }
     }
