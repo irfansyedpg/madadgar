@@ -343,7 +343,7 @@ function GetDistrict() {
 
 function PushNotificaitonAndorid(district, message) {
 
-    alert(district)
+ //   alert(district)
     var message = {
         to: '/topics/' + district,
         collapse_key: 'type_a',

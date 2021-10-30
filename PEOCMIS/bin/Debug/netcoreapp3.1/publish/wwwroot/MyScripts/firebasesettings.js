@@ -10,13 +10,14 @@
 
 
 var firebaseConfig = {
-apiKey: "AIzaSyBoP8U_54eM4EngHDBb7bgsVSks-NEBZnU",
-authDomain: "pdmamadadgar.firebaseapp.com",
-projectId: "pdmamadadgar",
-storageBucket: "pdmamadadgar.appspot.com",
-messagingSenderId: "750457853335",
-appId: "1:750457853335:web:cf4338e2a8e1418f6120d2",
-measurementId: "G-5NS6D9DXZP"
+    apiKey: "AIzaSyAN58VpcqVMwoke1GON5s2YBXJWw3YVs0o",
+    authDomain: "pdmamadadgar-1d65a.firebaseapp.com",
+    projectId: "pdmamadadgar-1d65a",
+    storageBucket: "pdmamadadgar-1d65a.appspot.com",
+    messagingSenderId: "231389258164",
+    appId: "1:231389258164:web:2d4358f1a7cc0d0cac92e1",
+    measurementId: "G-EG6J57JFQ7"
+
 };
 
 firebase.initializeApp(firebaseConfig);
@@ -51,7 +52,7 @@ function subscribeTokenToTopic(token, topic) {
     fetch('https://iid.googleapis.com/iid/v1/' + token + '/rel/topics/' + topic, {
         method: 'POST',
         headers: new Headers({
-            'Authorization': 'key=' + "AAArrrGFZc:APA91bEAL5wkVuqZ8EDeLkTbm7M5TycRgfE8zSwuncmCxpzEL-E4FGb1x2N6OYtdFwSak7lcLojbXhHGnRWW6muZaQ0KVp4CJIRVCyOHpdVrhgHPsu9qkwK6F4RKlrQYCAqnva62z5Dr"
+            'Authorization': 'key=' + "AAAANd_f4bQ:APA91bFwAO1pJpw7Uj85Sa_NwBYP_XEn7FJyXg3E0I1JfBJYWiomf2l2gRNGDFiYBhhRiDlLva_A-cl6oFaHH77z2pFMoo7VjP4r1JdeX_CmjNuBp3y57WeE6YQgAzg2GcGiVnI06Kd3 "
         })
     }).then(response => {
         if (response.status < 200 || response.status >= 400) {
