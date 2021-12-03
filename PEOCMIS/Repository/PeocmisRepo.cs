@@ -117,10 +117,12 @@ namespace PEOCMIS.Repository
             {
 
 
-                return _context.ErCntinfo.FromSql($"MD_Pro_Insert_EmergencyContact  @Department, @Contact, @Districtid",
+                return _context.ErCntinfo.FromSql($"MD_Pro_Insert_EmergencyContact  @Department, @Contact, @Districtid, @orderr",
                    new SqlParameter("@Department", ErCnt.Department),
                    new SqlParameter("@Contact", ErCnt.Contact),
-                   new SqlParameter("@Districtid", ErCnt.Districtid)
+                   new SqlParameter("@Districtid", ErCnt.Districtid) ,
+                   new SqlParameter("@orderr", ErCnt.orderNumber)
+
 
                 ).AsEnumerable().ToList();
 
@@ -210,9 +212,11 @@ namespace PEOCMIS.Repository
             {
 
 
-                return _context.QLCntinfo.FromSql($"MD_Pro_Insert_QuickLinks  @Department, @Link",
+                return _context.QLCntinfo.FromSql($"MD_Pro_Insert_QuickLinks  @Department, @Link, @Ordeer",
                    new SqlParameter("@Department", ErCnt.Department),
-                   new SqlParameter("@Link", ErCnt.Link)
+                   new SqlParameter("@Link", ErCnt.Link),
+                   new SqlParameter("@Ordeer", ErCnt.Ordeer)
+
 
                 ).AsEnumerable().ToList();
 

@@ -7,5 +7,8 @@ namespace DAL.ViewModel
         public string Link { get; set; }
 
         public int PK { get; set; }
+
+        public int Ordeer { get; set; }
+
     }
 }

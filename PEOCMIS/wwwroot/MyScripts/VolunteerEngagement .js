@@ -144,6 +144,8 @@ function PopulateTable(result) {
 
         rows += "<td  style='font-weight: bold'>" + index +
 
+            "<td> " + result[i].statusCheckedDate +
+            "<td> " + action +
             "<td>" + result[i].name +
             "<td>" + result[i].contactNo +
 
@@ -154,11 +156,7 @@ function PopulateTable(result) {
             "<td> " + result[i].type +
             "<td> " + result[i].dateRegistration +
             "<td> " + result[i].latt + ", " + result[i].longg +
-            "<td> " + result[i].pk +
-
-            "<td> " + action +
-
-            "<td> " + result[i].statusCheckedDate + "</td>";
+            "<td> " + result[i].pk +  "</td>";
 
          //   "< td class='text-center align-middle' > <div class='btn-group align-top'><a onclick='View(this)'><button class='btn btn-primary badge' data-toggle='tooltip' type='button'>Delete</button></a></td>"
 
@@ -343,7 +341,9 @@ function GetDistrict() {
 
 function PushNotificaitonAndorid(district, message) {
 
- //   alert(district)
+
+   // alert('/topics/' + district)
+  
     var message = {
         to: '/topics/' + district,
         collapse_key: 'type_a',
@@ -363,7 +363,7 @@ function PushNotificaitonAndorid(district, message) {
         dataType: "JSON",
 
         headers: {
-            Authorization: 'key=AAAArrrGFZc:APA91bEAL5wkVuqZ8EDeLkTbm7M5TycRgfE8zSwuncmCxpzEL-E4FGb1x2N6OYtdFwSak7lcLojbXhHGnRWW6muZaQ0KVp4CJIRVCyOHpdVrhgHPsu9qkwK6F4RKlrQYCAqnva62z5Dr'
+            Authorization: 'key=AAAANd_f4bQ:APA91bFwAO1pJpw7Uj85Sa_NwBYP_XEn7FJyXg3E0I1JfBJYWiomf2l2gRNGDFiYBhhRiDlLva_A-cl6oFaHH77z2pFMoo7VjP4r1JdeX_CmjNuBp3y57WeE6YQgAzg2GcGiVnI06Kd3'
 
         },
 

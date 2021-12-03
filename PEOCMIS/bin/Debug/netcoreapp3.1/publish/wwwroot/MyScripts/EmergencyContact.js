@@ -1,4 +1,4 @@
-﻿/// <reference path="complaints.js" />
+﻿
 
 
 $(document).ready(function () {
@@ -15,6 +15,9 @@ $(document).ready(function () {
 
         let dptName = document.forms["form_submit"]["deptName"].value;
         let cntNumber = document.forms["form_submit"]["cntNumber"].value;
+
+        let orderNumber = document.forms["form_submit"]["orderNumber"].value;
+
         if (dptName == "") {
        //     alert("Please Enter Department Name");
 
@@ -26,6 +29,11 @@ $(document).ready(function () {
        
         if (cntNumber == "") {
             toastr["error"]("Enter Value", 'Please Enter Department Contact Number!');
+            return false;
+        }
+
+        if (orderNumber == "") {
+            toastr["error"]("Enter Value", 'Please Enter Order Number!');
             return false;
         }
 
@@ -69,7 +77,7 @@ function InsertEmergency() {
 
         
 
-        data: { Department: $("#deptName").val(), Contact: $("#cntNumber").val(), Districtid: distid },
+        data: { Department: $("#deptName").val(), Contact: $("#cntNumber").val(), Districtid: distid, orderNumber: $("#orderNumber").val() },
 
         dataType: "JSON",
         success: function (response) {
@@ -170,6 +178,10 @@ function PopulateTable(result) {
             "<td>" + result[i].contact +
             "<td>" + result[i].district +
             "<td> " + result[i].pk +
+
+            "<td> " + result[i].orderr +
+
+
 
             "</td><td class='text-center align-middle'><div class='btn-group align-top'><a onclick='View(this)'><button class='btn btn-primary badge'data-toggle='tooltip' type='button'>Delete</button></a></td>"
 

@@ -7,5 +7,7 @@ namespace DAL.Models
         public string Contact { get; set; }
         public int Districtid { get; set; }
         public int PK { get; set; }
+        public int orderNumber { get; set; }
+
     }
 }

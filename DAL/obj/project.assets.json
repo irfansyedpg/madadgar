@@ -7040,19 +7040,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\M Usman\\.nuget\\packages\\": {}
+    "C:\\Users\\galaxy\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\data transfer\\Mobilise one Folder\\Mobilise Civil Protection APp\\PEOCMIS\\DAL\\DAL.csproj",
+      "projectUniqueName": "E:\\data transfer\\Mobilise one Folder\\Mobilise Civil Protection APp\\PEOCMIS\\DAL\\DAL.csproj",
       "projectName": "DAL",
-      "projectPath": "D:\\data transfer\\Mobilise one Folder\\Mobilise Civil Protection APp\\PEOCMIS\\DAL\\DAL.csproj",
-      "packagesPath": "C:\\Users\\M Usman\\.nuget\\packages\\",
-      "outputPath": "D:\\data transfer\\Mobilise one Folder\\Mobilise Civil Protection APp\\PEOCMIS\\DAL\\obj\\",
+      "projectPath": "E:\\data transfer\\Mobilise one Folder\\Mobilise Civil Protection APp\\PEOCMIS\\DAL\\DAL.csproj",
+      "packagesPath": "C:\\Users\\galaxy\\.nuget\\packages\\",
+      "outputPath": "E:\\data transfer\\Mobilise one Folder\\Mobilise Civil Protection APp\\PEOCMIS\\DAL\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\M Usman\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\galaxy\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -7064,6 +7064,7 @@
       },
       "frameworks": {
         "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
           "projectReferences": {}
         }
       },
@@ -7075,6 +7076,7 @@
     },
     "frameworks": {
       "netstandard2.1": {
+        "targetAlias": "netstandard2.1",
         "dependencies": {
           "DBContext": {
             "target": "Package",
@@ -7120,7 +7122,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
       }
     }
   }

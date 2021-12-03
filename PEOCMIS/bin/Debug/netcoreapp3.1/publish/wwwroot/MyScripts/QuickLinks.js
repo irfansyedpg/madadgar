@@ -15,6 +15,10 @@ $(document).ready(function () {
 
         let dptName = document.forms["form_submit"]["deptName"].value;
         let cntNumber = document.forms["form_submit"]["link"].value;
+        let orderNumber = document.forms["form_submit"]["orderNumber"].value;
+
+
+
         if (dptName == "") {
        //     alert("Please Enter Department Name");
 
@@ -26,6 +30,11 @@ $(document).ready(function () {
        
         if (cntNumber == "") {
             toastr["error"]("Enter Value", 'Please Enter Department Link!');
+            return false;
+        }
+
+        if (orderNumber == "") {
+            toastr["error"]("Enter Value", 'Please Enter Order Number!');
             return false;
         }
 
@@ -67,7 +76,7 @@ function InsertData() {
 
 
 
-        data: { Department: $("#deptName").val(), Link: $("#link").val() },
+        data: { Department: $("#deptName").val(), Link: $("#link").val(), ordeer: $("#orderNumber").val()  },
 
         dataType: "JSON",
         success: function (response) {
@@ -171,6 +180,8 @@ function PopulateTable(result) {
             "<td>" + result[i].link +
 
             "<td> " + result[i].pk +
+
+            "<td> " + result[i].ordeer +
 
             "</td><td class='text-center align-middle'><div class='btn-group align-top'><a onclick='View(this)'><button class='btn btn-primary badge'data-toggle='tooltip' type='button'>Delete</button></a></td>"
 

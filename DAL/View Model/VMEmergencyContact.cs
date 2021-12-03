@@ -7,5 +7,7 @@ namespace DAL.ViewModel
         public string Contact { get; set; }
         public string District { get; set; }
         public int PK { get; set; }
+
+        public int orderr { get; set; }
     }
 }

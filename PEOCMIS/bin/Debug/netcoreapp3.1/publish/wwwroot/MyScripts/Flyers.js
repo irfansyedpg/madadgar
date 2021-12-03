@@ -375,6 +375,9 @@ function DeleteData(pk) {
 
 function PushNotificaitonAndorid(Newtitle) {
 
+
+   
+
  var message = {      
         to: '/topics/news',
         collapse_key: 'type_a',
@@ -394,7 +397,7 @@ function PushNotificaitonAndorid(Newtitle) {
         dataType: "JSON",
 
         headers: {
-            Authorization: 'key=AAAArrrGFZc:APA91bEAL5wkVuqZ8EDeLkTbm7M5TycRgfE8zSwuncmCxpzEL-E4FGb1x2N6OYtdFwSak7lcLojbXhHGnRWW6muZaQ0KVp4CJIRVCyOHpdVrhgHPsu9qkwK6F4RKlrQYCAqnva62z5Dr'
+            Authorization: 'key=AAAANd_f4bQ:APA91bFwAO1pJpw7Uj85Sa_NwBYP_XEn7FJyXg3E0I1JfBJYWiomf2l2gRNGDFiYBhhRiDlLva_A-cl6oFaHH77z2pFMoo7VjP4r1JdeX_CmjNuBp3y57WeE6YQgAzg2GcGiVnI06Kd3'
          
         },
 
