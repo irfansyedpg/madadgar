@@ -139,7 +139,8 @@ function Aprrove(ele) {
     var r = confirm("Are You Sure to Change the User Status!  \n\nPress OK to Change");
     if (r == true) {
 
-        UpdateUserInfo(logId,1);
+        UpdateUserInfo(logId, 1);
+        PushNotificaitonAndoridUserstatus(logId, "Your registration as a PDMA staff member has been approved. Please Click this Message to activate");
 
     } else {
 
@@ -155,7 +156,9 @@ function Disaprove(ele) {
     var r = confirm("Are You Sure to Change the User Status!  \n\nPress OK to Change");
     if (r == true) {
 
-        UpdateUserInfo(logId,0);
+        UpdateUserInfo(logId, 0);
+
+        PushNotificaitonAndoridUserstatus(logId, "Your registration as a PDMA staff member has been Suspended Please Contact PDMA Staff for more Detail.");
 
     } else {
 
@@ -220,6 +223,50 @@ function UpdateUserInfo(pk,status) {
 }
 
 
+function PushNotificaitonAndoridUserstatus(mobileno, message) {
+
+
+    // alert('/topics/' + district)
+
+    var message = {
+        to: '/topics/' + mobileno.replace(/\s+/g, ' ').trim(),
+        collapse_key: 'type_a',
+        notification: {
+            title: 'PDMA Staff Activation',
+            body: message
+        }
+    }
+
+
+
+    $.ajax({
+        type: "POST",
+        url: "https://fcm.googleapis.com/fcm/send",
+        contentType: 'application/json',
+        processData: false,
+        dataType: "JSON",
+
+        headers: {
+            Authorization: 'key=AAAANd_f4bQ:APA91bFwAO1pJpw7Uj85Sa_NwBYP_XEn7FJyXg3E0I1JfBJYWiomf2l2gRNGDFiYBhhRiDlLva_A-cl6oFaHH77z2pFMoo7VjP4r1JdeX_CmjNuBp3y57WeE6YQgAzg2GcGiVnI06Kd3'
+
+        },
+
+        data: JSON.stringify(message),
+
+        success: function (response) {
+
+
+            toastr["success"]("Sent", 'Message broadcasted Successfully!');
+
+            $("#message").val("");
+
+
+
+        }
+
+    });
+
+}
 
 
 

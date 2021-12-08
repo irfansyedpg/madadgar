@@ -48,6 +48,9 @@ $(document).ready(function () {
         var sel = document.getElementById("Districts");
 
         var distt = sel.options[sel.selectedIndex].text;
+        distt = distt.replace(/ /g, "_");
+
+  
 
         PushNotificaitonAndorid(distt, message);
 
@@ -318,6 +321,10 @@ function GetDistrict() {
                         .append($('<option>', { value: result[i].pk })
                             .text(result[i].district));
                 }
+
+                $('#Districts')
+                    .append($('<option>', { value: "All" })
+                        .text("All"));
             }
 
         },

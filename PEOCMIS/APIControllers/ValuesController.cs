@@ -9,7 +9,6 @@ using DAL.ViewModel;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using PEOCMIS.Infrastructure;
-
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace PEOCMIS.Controllers
@@ -306,7 +305,12 @@ namespace PEOCMIS.Controllers
 
             }
 
-            return Json(new { message=text,id=result.Id,district=result.District});
+            return Json(new { message=text,id=result.Id,district=result.District,mobileno=result.Mobileno,
+            
+                email=result.Email,
+                usertype=result.Usertype,
+                userstatus=result.Userstatus
+            });
 
         }
 
